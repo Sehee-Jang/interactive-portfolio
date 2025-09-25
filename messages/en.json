@@ -1,0 +1,35 @@
+{
+  "Prologue": {
+    "nameMeaning": {
+      "title": "I am Sehee Jang, a developer who spreads joy widely to the world.",
+      "description": "My name, Sehee Jang (張世喜), carries the meaning of spreading joy widely to the world. Through development, I aim to bring small delights and great happiness to more people, just as my name suggests."
+    },
+    "ending": "This journey is not mine alone. Are you ready to share joy together?"
+  },
+  "Chapter1": {
+    "title": "Why Joy?",
+    "question": "Is a developer just someone who writes code? Or someone who creates experiences?",
+    "keywords": {
+      "creative": "Even a simple button can bring joy.",
+      "interactive": "Data becomes more fun when it moves.",
+      "storytelling": "A project should be a story, not just a function."
+    }
+  },
+  "Chapter2": {
+    "title": "The Process of Realizing Joy",
+    "problem": "At the starting point of a dull journey, the problems were clear.",
+    "approach": "I designed each step of the user’s journey with joy.",
+    "result": "Both operations and experiences have become more joyful."
+  },
+  "Chapter3": {
+    "title": "The Traces of Joy",
+    "metrics": "Change is proven both in numbers and in emotions.",
+    "feedback": "People’s joy is the true result.",
+    "impact": "Joy extends not only to users but also to the entire team."
+  },
+  "Epilogue": {
+    "title": "Where will the next journey to spread joy to the world be?",
+    "message": "Is there a place where you want to spread joy? I would love to join you on that journey.",
+    "signature": "Sehee Jang – A developer who spreads joy to the world"
+  }
+}
