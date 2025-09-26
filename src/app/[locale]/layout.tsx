@@ -1,16 +1,34 @@
-import { setRequestLocale } from "next-intl/server";
-import type { AppLocale } from "@/i18n/routing";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { routing, type AppLocale } from "@/i18n/routing";
+import { notFound } from "next/navigation";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
-export default async function LocaleLayout(props: {
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
   children: React.ReactNode;
   params: Promise<{ locale: AppLocale }>;
 }) {
-  const { locale } = await props.params;
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  // 요청 컨텍스트에 로케일 설정 (middleware와 연동)
   setRequestLocale(locale);
 
+  // 현재 locale에 대응하는 messages 로드
+  const messages = await getMessages({ locale });
+
   return (
-    <html lang={locale}>
-      <body>{props.children}</body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Header />
+      {children}
+      <Footer />
+    </NextIntlClientProvider>
   );
 }
