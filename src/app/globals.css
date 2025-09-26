@@ -1,28 +1,144 @@
+/* Tailwind v4: 한 줄이면 base+utilities 포함 */
 @import "tailwindcss";
 
+/* ===========================
+   Light/Dark 토큰 
+   =========================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --fg: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --border: #e5e7eb; /* gray-200 */
+  --primary: #2563eb; /* blue-600 */
+  --primary-hover: #1d4ed8; /* blue-700 */
+  --ring: 0 0 0 2px rgba(37, 99, 235, 0.5); /* blue focus ring */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans";
-  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New";
+.dark {
+  --bg: #0b0b0e; /* 아주 짙은 다크 */
+  --fg: #f8fafc; /* slate-50 */
+  --muted: #cbd5e1; /* slate-300 */
+  --border: #1f2937; /* gray-800 */
+  --primary: #3b82f6; /* blue-500 */
+  --primary-hover: #2563eb; /* blue-600 */
+  --ring: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===========================
+   Body Reset & Typography
+   =========================== */
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+html {
+  /* 폰트 스무딩 & 스크롤 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans);
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  /* Toss톤 산세리프 스택 (가벼운/담백한 인상) */
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue",
+    Arial, "PingFang SC", "Hiragino Sans", sans-serif;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+}
+
+/* 가변 폰트를 가지고 있다면 우선 사용 (선택) */
+@supports (font-variation-settings: normal) {
+  body {
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1, "ss02" 1;
+  }
+}
+
+/* 링크/버튼 포커스: 명확한 파란 링 */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 8px;
+}
+
+/* 텍스트 선택 색상 */
+::selection {
+  background: rgba(37, 99, 235, 0.18); /* blue-600, 18% */
+  color: var(--fg);
+}
+
+/* 이미지/비디오: 컨테이너에 맞춤 */
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 버튼/링크 기본 리셋(손가락 커서 등) */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* 스크롤바 (플랫, 미니멀) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.5) transparent; /* slate-400 */
+}
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.5);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 모션 최소화 존중 */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 컨테이너 유틸(중앙 폭) – 필요 시 사용 */
+.container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  max-width: 72rem; /* 1152px */
+}
+
+/* 기본 버튼 토큰(파란 실색) – 필요 시 재사용 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
 }
