@@ -98,7 +98,6 @@ html {
 
 body {
   margin: 0;
-  /* Toss톤 산세리프 스택 (가벼운/담백한 인상) */
   font-family: "Pretendard", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
     "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans", sans-serif;
@@ -195,6 +194,13 @@ button,
 }
 .btn-primary:hover {
   background: var(--primary-hover);
+}
+
+/* 3D 플립용: 모든 브라우저에서 backface 숨김 보장 */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(1px); /* z-fighting 방지용 미세 돌출 */
 }
 
 @theme inline {
