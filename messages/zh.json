@@ -16,9 +16,18 @@
     "title": "为什么是喜悦？",
     "question": "开发者只是写代码的人吗？还是创造体验的人？",
     "keywords": {
-      "creative": "即使是一个简单的按钮，也能带来喜悦。",
-      "interactive": "数据在流动时会更有趣。",
-      "storytelling": "项目不应只是功能，而应成为故事。"
+      "creative": {
+        "text": "即使是一个简单的按钮，也能带来喜悦。",
+        "example": "通过即时弹出的提示（Toast）和 EmailJS 确认邮件，用户能立刻安心，知道预约已成功提交。"
+      },
+      "interactive": {
+        "text": "数据在流动时会更有趣。",
+        "example": "即使每位导师的工作时间不同，预约系统也能同步，仅显示当前实际可预约的时间段。"
+      },
+      "storytelling": {
+        "text": "一个项目应该成为故事，而不仅仅是功能集合。",
+        "example": "我把学习旅程设计成一个故事——在路线图中加入了完成次数和最近记录的仪表盘。"
+      }
     }
   },
   "ch2": {
@@ -29,21 +38,136 @@
   },
   "ch3": {
     "title": "喜悦留下的痕迹",
-    "metrics": "变化既能用数字，也能用情感来证明。",
-    "feedback": "人们的喜悦就是成果。",
-    "impact": "喜悦不仅扩展到用户，还扩展到整个团队。"
+    "metrics": "改变既能用数字证明，也能用感受证明。",
+    "metricsLabel": "核心指标",
+    "feedback": "人们的喜悦就是结果。",
+    "impact": "喜悦不只属于用户，也扩散到整个团队。",
+    "messageHeadline": "我做出的细小改变，让某人的一天更愉快。",
+    "beforeLabel": "之前",
+    "afterLabel": "之后",
+    "roles": {
+      "student": "学员",
+      "tutor": "导师"
+    },
+    "feedbackItems": {
+      "student1": "预约与修改变得更方便了。",
+      "tutor1": "通过休息日设置，排班更轻松。"
+    },
+    "ops": {
+      "before": "运营手动核对与调整预约",
+      "after": "自动邮件提醒与管理后台自动化"
+    },
+    "metricLabels": {
+      "duplicateBookings": "重复预约数量",
+      "opsInterventionMinutes": "运营介入时长"
+    },
+    "units": {
+      "count": "件",
+      "minutes": "分钟"
+    }
   },
-  "ep": {
+  "ch4": {
     "title": "下一段将喜悦传播到世界的旅程将在哪里？",
     "message": "有想把喜悦传播到的地方吗？我愿意与你一起踏上这段旅程。",
+    "cta": "一起出发",
     "signature": "张世喜 – 将喜悦传播到世界的开发者"
   },
-  "footer": {},
+  "epilogue": {
+    "title": "传播喜悦的下一段旅程",
+    "subtitle": "如果我的介绍已足够，请在下方继续。",
+    "signatureSuffix": "把喜悦传递给世界的开发者",
+    "cta": {
+      "mailto": {
+        "subject": "看到作品集后与您联系",
+        "body": "您好，张世喜。\n\n简单自我介绍：\n- 单位/姓名：\n- 感兴趣的内容（招聘/面试/社交等）：\n- 参考链接：\n\n谢谢。"
+      },
+      "resume": {
+        "title": "简历",
+        "desc": "一目了然地查看代表项目和技能。",
+        "download": "下载简历",
+        "view": "查看简历",
+        "note": "中文/英文文件分别提供。"
+      },
+      "emailCard": {
+        "title": "通过邮件联系",
+        "desc": "直接打开邮件应用或复制地址。",
+        "button": "发送邮件",
+        "copyEmail": "复制邮箱",
+        "copied": "已复制"
+      },
+      "profile": {
+        "title": "个人资料",
+        "desc": "也可以在这里查看代码和经历。",
+        "github": {
+          "label": "GitHub",
+          "url": "https://github.com/Sehee-Jang"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/seheejang"
+        }
+      },
+      "copyFallback": "无法访问剪贴板，请手动复制邮箱地址。"
+    },
+    "quick": {
+      "title": "快速反馈",
+      "desc": "只需点击一次，信号即可直达我。",
+      "labels": {
+        "hire": "我有招聘机会",
+        "interview": "我想邀请您面试",
+        "feedback": "我想留下网站反馈"
+      },
+      "sending": "发送中...",
+      "done": "已发送！",
+      "error": "发送失败，请稍后再试。",
+      "note": "选择内容仅用于回复，不会用于其他用途。"
+    }
+  },
+  "footer": {
+    "ariaLabel": "网站页脚",
+    "brand": "Sehee Jang",
+    "tagline": "把喜悦广泛传递的开发者",
+    "sections": {
+      "title": "分区",
+      "why": "为什么是“喜悦”",
+      "projects": "项目旅程",
+      "impact": "影响与伙伴",
+      "contact": "联系"
+    },
+    "resources": {
+      "title": "资源",
+      "source": "源代码",
+      "deploy": "部署"
+    },
+    "legal": {
+      "title": "政策",
+      "privacy": "隐私政策",
+      "terms": "使用条款"
+    },
+    "contact": {
+      "title": "联系",
+      "cta": "开始项目沟通"
+    },
+    "contactEmail": "通过邮箱联系",
+    "rights": "保留所有权利。"
+  },
   "lang": {
     "select": "语言选择",
     "ko": "韩国语",
     "en": "英语",
     "ja": "日语",
     "zh": "汉语"
+  },
+  "nav": {
+    "aria": {
+      "pageNav": "页面导航",
+      "goPrev": "前往 {page}",
+      "goNext": "前往 {page}"
+    },
+    "pages": {
+      "prologue": "序章",
+      "projects": "项目",
+      "epilogue": "尾声"
+    }
   }
 }

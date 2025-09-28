@@ -22,11 +22,20 @@
   },
   "ch1": {
     "title": "Why Joy?",
-    "question": "Is a developer just someone who writes code? Or someone who creates experiences?",
+    "question": "Is a developer just someone who writes code, or someone who creates experiences?",
     "keywords": {
-      "creative": "Even a simple button can bring joy.",
-      "interactive": "Data becomes more fun when it moves.",
-      "storytelling": "A project should be a story, not just a function."
+      "creative": {
+        "text": "Even a simple button can bring joy.",
+        "example": "With instant toasts and EmailJS confirmation emails, users immediately feel assured their booking was received."
+      },
+      "interactive": {
+        "text": "Data becomes more engaging when it moves.",
+        "example": "Even if each tutor has different working hours, the booking system syncs to only show time slots that are actually available now."
+      },
+      "storytelling": {
+        "text": "A project should be a story, not just a set of features.",
+        "example": "I designed it so that the learning journey becomes a story — including completed counts and recent activities in the roadmap dashboard."
+      }
     }
   },
   "ch2": {
@@ -36,22 +45,137 @@
     "result": "Both operations and experiences have become more joyful."
   },
   "ch3": {
-    "title": "The Traces of Joy",
-    "metrics": "Change is proven both in numbers and in emotions.",
-    "feedback": "People’s joy is the true result.",
-    "impact": "Joy extends not only to users but also to the entire team."
+    "title": "Traces of Joy",
+    "metrics": "Change is proven both in numbers and feelings.",
+    "metricsLabel": "Key Metrics",
+    "feedback": "People’s joy is the real result.",
+    "impact": "Joy extends beyond users to the whole team.",
+    "messageHeadline": "Small changes I built made someone’s day more joyful.",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "roles": {
+      "student": "Student",
+      "tutor": "Tutor"
+    },
+    "feedbackItems": {
+      "student1": "Booking and editing got much easier.",
+      "tutor1": "Day-off settings made scheduling simple."
+    },
+    "ops": {
+      "before": "Ops team manually verified and adjusted bookings",
+      "after": "Automated email alerts and admin workflows"
+    },
+    "metricLabels": {
+      "duplicateBookings": "Duplicate bookings",
+      "opsInterventionMinutes": "Ops intervention time"
+    },
+    "units": {
+      "count": "cases",
+      "minutes": "min"
+    }
   },
-  "ep": {
+  "ch4": {
     "title": "Where will the next journey to spread joy to the world be?",
     "message": "Is there a place where you want to spread joy? I would love to join you on that journey.",
+    "cta": "Work together",
     "signature": "Sehee Jang – A developer who spreads joy to the world"
   },
-  "footer": {},
+  "epilogue": {
+    "title": "The Next Journey to Spread Joy",
+    "subtitle": "If my introduction was enough, let’s continue below.",
+    "signatureSuffix": "A developer spreading joy to the world",
+    "cta": {
+      "mailto": {
+        "subject": "Reaching out after seeing your portfolio",
+        "body": "Hello Sehee,\n\nQuick introduction:\n- Affiliation/Name:\n- Interest (Hiring / Interview / Networking, etc.):\n- Reference link:\n\nThank you."
+      },
+      "resume": {
+        "title": "Resume",
+        "desc": "See key projects and skills at a glance.",
+        "download": "Download CV",
+        "view": "View CV",
+        "note": "Korean/English files are provided separately."
+      },
+      "emailCard": {
+        "title": "Contact by Email",
+        "desc": "Open your mail app directly or copy the address.",
+        "button": "Send Email",
+        "copyEmail": "Copy Email",
+        "copied": "Copied"
+      },
+      "profile": {
+        "title": "Profiles",
+        "desc": "You can also check code and career history here.",
+        "github": {
+          "label": "GitHub",
+          "url": "https://github.com/Sehee-Jang"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/seheejang"
+        }
+      },
+      "copyFallback": "Clipboard access is restricted. Please copy the email address manually."
+    },
+    "quick": {
+      "title": "Quick Feedback",
+      "desc": "With one click, your signal reaches me instantly.",
+      "labels": {
+        "hire": "I have a hiring opportunity",
+        "interview": "I’d like to invite you for an interview",
+        "feedback": "I want to leave site feedback"
+      },
+      "sending": "Sending...",
+      "done": "Sent!",
+      "error": "Failed to send. Please try again later.",
+      "note": "Your selection will only be used for response purposes."
+    }
+  },
+  "footer": {
+    "ariaLabel": "Site footer",
+    "brand": "Sehee Jang",
+    "tagline": "A developer who spreads joy widely",
+    "sections": {
+      "title": "Sections",
+      "why": "Why Joy",
+      "projects": "Projects as Journeys",
+      "impact": "Impact & People",
+      "contact": "Contact"
+    },
+    "resources": {
+      "title": "Resources",
+      "source": "Source code",
+      "deploy": "Deployment"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    },
+    "contact": {
+      "title": "Contact",
+      "cta": "Start a project chat"
+    },
+    "contactEmail": "Contact via email",
+    "rights": "All rights reserved."
+  },
   "lang": {
     "select": "Language",
     "ko": "Korean",
     "en": "English",
     "ja": "Japanese",
     "zh": "Chinese"
+  },
+  "nav": {
+    "aria": {
+      "pageNav": "Page navigation",
+      "goPrev": "Go to {page}",
+      "goNext": "Go to {page}"
+    },
+    "pages": {
+      "prologue": "Prologue",
+      "projects": "Projects",
+      "epilogue": "Epilogue"
+    }
   }
 }

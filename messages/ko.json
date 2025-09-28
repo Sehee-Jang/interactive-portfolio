@@ -13,13 +13,26 @@
     "cta": "프로젝트로 이동",
     "scroll": "스크롤"
   },
+  "projects": {
+    "title": "개발자 장세희",
+    "subtitle": "기쁨 프로젝트"
+  },
   "ch1": {
     "title": "왜 기쁨인가?",
     "question": "개발자는 코드를 짜는 사람일까요? 아니면 경험을 만드는 사람일까요?",
     "keywords": {
-      "creative": "단순한 버튼도 기쁨을 줄 수 있습니다.",
-      "interactive": "데이터는 움직일 때 더 재미있습니다.",
-      "storytelling": "프로젝트는 기능이 아니라 이야기가 되어야 합니다."
+      "creative": {
+        "text": "단순한 버튼도 기쁨을 줄 수 있습니다.",
+        "example": "즉시 뜨는 알림(Toast)과 EmailJS 확인 메일로, ‘예약이 제대로 접수됐다’는 안심을 바로 전달합니다."
+      },
+      "interactive": {
+        "text": "데이터는 움직일 때 더 재미있습니다.",
+        "example": "튜터별 근무 시간이 다르더라도, 예약 현황을 동기화해 실제로 지금 예약 가능한 시간대만 보여줍니다."
+      },
+      "storytelling": {
+        "text": "프로젝트는 기능이 아니라 이야기가 되어야 합니다.",
+        "example": "학습 여정을 이야기로 남길 예정입니다 — 완료 카운트와 최근 내역 대시보드를 로드맵에 포함했습니다."
+      }
     }
   },
   "ch2": {
@@ -31,20 +44,134 @@
   "ch3": {
     "title": "기쁨이 남긴 흔적",
     "metrics": "변화는 숫자로도, 감정으로도 증명됩니다.",
+    "metricsLabel": "성과 지표",
     "feedback": "사람들의 기쁨이 곧 결과입니다.",
-    "impact": "기쁨은 사용자뿐 아니라 팀 전체로 확장됩니다."
+    "impact": "기쁨은 사용자뿐 아니라 팀 전체로 확장됩니다.",
+    "messageHeadline": "제가 만든 작은 변화가, 누군가의 하루를 더 즐겁게 바꿨습니다.",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "roles": {
+      "student": "수강생",
+      "tutor": "튜터"
+    },
+    "feedbackItems": {
+      "student1": "예약·수정이 간편해졌어요",
+      "tutor1": "휴무 설정으로 일정 관리가 쉬워졌습니다"
+    },
+    "ops": {
+      "before": "운영진이 수동으로 예약 확인·조정",
+      "after": "자동 이메일 알림과 관리자 페이지 자동화"
+    },
+    "metricLabels": {
+      "duplicateBookings": "중복 예약 건수",
+      "opsInterventionMinutes": "운영 개입 시간"
+    },
+    "units": {
+      "count": "건",
+      "minutes": "분"
+    }
   },
-  "ep": {
+  "ch4": {
     "title": "세상에 기쁨을 펼칠 다음 여정은 어디일까요?",
     "message": "세상에 기쁨을 펼치고 싶은 곳이 있나요? 저는 그 여정을 함께하고 싶습니다.",
+    "cta": "함께하기",
     "signature": "張世喜 – 세상에 기쁨을 펼치는 개발자"
   },
-  "footer": {},
+  "epilogue": {
+    "title": "세상에 기쁨을 펼칠 다음 여정",
+    "subtitle": "제 소개가 충분했다면, 아래에서 이어가요.",
+    "signatureSuffix": "세상에 기쁨을 펼치는 개발자",
+    "cta": {
+      "mailto": {
+        "subject": "포트폴리오 보고 연락드립니다",
+        "body": "안녕하세요, 장세희님.\n\n간단 소개:\n- 소속/이름:\n- 관심 내용(채용/인터뷰/네트워킹 등):\n- 참고 링크:\n\n감사합니다."
+      },
+      "resume": {
+        "title": "이력서 다운로드",
+        "desc": "대표 프로젝트와 스킬을 한 눈에.",
+        "download": "CV 다운로드",
+        "view": "CV 바로가기",
+        "note": "국문/영문 파일은 경로로 구분됩니다."
+      },
+      "emailCard": {
+        "title": "이메일로 연락하기",
+        "desc": "바로 메일 앱을 열거나 주소를 복사하세요.",
+        "button": "메일 보내기",
+        "copyEmail": "이메일 복사",
+        "copied": "복사됨"
+      },
+      "profile": {
+        "title": "프로필",
+        "desc": "코드와 이력은 여기에서도 확인할 수 있어요.",
+        "github": { 
+          "label": "GitHub", 
+          "url": "https://github.com/Sehee-Jang" },
+        "linkedin": {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/seheejang"
+        }
+      },
+      "copyFallback": "클립보드 접근이 제한된 환경입니다. 메일 주소를 직접 복사해주세요."
+    },
+    "quick": {
+      "title": "빠른 피드백",
+      "desc": "클릭 한 번이면 제게 바로 신호가 도착합니다.",
+      "labels": {
+        "hire": "채용 제안 있어요",
+        "interview": "인터뷰 제안 드려요",
+        "feedback": "사이트 피드백 남길게요"
+      },
+      "sending": "전송 중...",
+      "done": "보내졌어요!",
+      "error": "전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
+      "note": "선택 내용은 연락처 응답 이외 용도로 사용하지 않습니다."
+    }
+  },
+  "footer": {
+    "ariaLabel": "사이트 푸터",
+    "brand": "Sehee Jang",
+    "tagline": "세상에 기쁨을 널리 펼치는 개발자",
+    "sections": {
+      "title": "섹션",
+      "why": "왜 기쁨인가",
+      "projects": "프로젝트 여정",
+      "impact": "영향과 사람들",
+      "contact": "문의하기"
+    },
+    "resources": {
+      "title": "리소스",
+      "source": "소스 코드",
+      "deploy": "배포"
+    },
+    "legal": {
+      "title": "정책",
+      "privacy": "개인정보처리방침",
+      "terms": "이용약관"
+    },
+    "contact": {
+      "title": "연락",
+      "cta": "프로젝트 상담"
+    },
+    "contactEmail": "이메일로 연락하기",
+    "rights": "All rights reserved."
+  },
   "lang": {
     "select": "언어 선택",
     "ko": "한국어",
     "en": "영어",
     "ja": "일본어",
     "zh": "중국어"
+  },
+  "nav": {
+    "aria": {
+      "pageNav": "페이지 이동",
+      "goPrev": "{page}로 이동",
+      "goNext": "{page}로 이동"
+    },
+    "pages": {
+      "prologue": "프롤로그",
+      "projects": "프로젝트",
+      "epilogue": "에필로그"
+    }
   }
 }
