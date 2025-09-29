@@ -42,12 +42,12 @@
     "title": "The Process of Realizing Joy",
     "problem": "At the starting point of a dull journey, the problems were clear.",
     "problems": {
-      "0": "Hard to see each tutor’s working hours at a glance",
-      "1": "Hard to view overall booking status at a glance",
-      "2": "Working hours and available slots are separated, causing confusion and extra checks",
-      "3": "Difficult to reflect each tutor’s working hours/holidays",
-      "4": "Real-time status not reflected → risk of double booking",
-      "5": "Manual checks/contacts by ops cause slow responses",
+      "tutorHoursVisibility": "Hard to see each tutor’s working hours at a glance",
+      "bookingOverview": "Hard to view booking status at a glance",
+      "splitSlotsConfusion": "Availability split across calendars caused confusion; constant checking required",
+      "offdaysNotReflected": "Tutor working hours / off-days weren’t properly reflected",
+      "noRealtimeDupRisk": "No real-time status → risk of double bookings",
+      "manualOpsDelay": "Manual checks/emails by ops led to slow responses",
       "fallback": "Problem {index}"
     },
     "approach": "I designed each step of the user’s journey with joy.",
