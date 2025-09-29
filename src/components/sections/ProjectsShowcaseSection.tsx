@@ -15,32 +15,11 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-type ProblemSlide = Readonly<{
+/* -------- 공용 타입 -------- */
+type SlideItem = Readonly<{
   text: string;
   image?: { src: string; alt?: string };
 }>;
-
-interface ProjectsShowcaseSectionProps {
-  // Ch.2-1 개편 전 프로젝트 스크린샷
-  problemScreenshots?: ReadonlyArray<{ src: string; alt?: string }>;
-  // Ch.2-2 데모 GIF/영상(선택)
-  approachGifs?: {
-    chooseTutor?: string;
-    chooseTime?: string;
-    fillForm?: string;
-    liveStatusDemo?: string;
-    tutorPageDemo?: string;
-  };
-
-  // 슬라이드 텍스트/이미지를 직접 주입하고 싶을 때 사용
-  problemSlides?: ReadonlyArray<{
-    text: string;
-    image?: { src: string; alt?: string };
-  }>;
-
-  // 사용 기술 뱃지
-  techStack?: string[];
-}
 
 /* ------------------------ 유틸 훅 ------------------------ */
 // 최초 1회만 in-view 판정하여 등장 애니메이션 트리거
@@ -77,15 +56,25 @@ function useSwipe(onLeft: () => void, onRight: () => void) {
 
 /* ------------------------ 섹션 ------------------------ */
 
-export default function ProjectsShowcaseSection({
-  problemScreenshots,
-  approachGifs,
-  problemSlides,
-  techStack = ["Next.js", "React", "Firebase", "EmailJS"],
-}: ProjectsShowcaseSectionProps) {
+export default function ProjectsShowcaseSection() {
   const t = useTranslations();
 
-  // 접근 단계 카드 정의 (정적 경로 기반 데모 GIF)
+  /* 1. 문제 슬라이드 */
+  const problems = [
+    { key: "tutorHoursVisibility", media: "/images/problems/old-1.webp" },
+    { key: "bookingOverview", media: "/images/problems/old-2.webp" },
+    { key: "splitSlotsConfusion", media: "/images/problems/old-3.webp" },
+    { key: "offdaysNotReflected", media: "/images/problems/old-4.webp" },
+    { key: "noRealtimeDupRisk", media: "/images/problems/old-5.webp" },
+    { key: "manualOpsDelay", media: "/images/problems/old-6.webp" },
+  ] as const;
+
+  const normalizedSlides: ReadonlyArray<SlideItem> = problems.map((p) => ({
+    text: t(`ch2.problems.${p.key}`),
+    image: { src: p.media, alt: t(`ch2.problems.${p.key}`) },
+  }));
+
+  /* 2. 접근 단계 카드(GIF 기본 경로) */
   const steps = [
     { key: "chooseTutor", media: "/images/demo/choose-tutor.gif" },
     { key: "chooseTime", media: "/images/demo/choose-time.gif" },
@@ -95,30 +84,19 @@ export default function ProjectsShowcaseSection({
     { key: "email", media: "/images/demo/email.gif" },
   ] as const;
 
-  // 결과 타임라인(아이콘+텍스트 i18n 키)
+  /* 3. 결과 타임라인 */
   const results = [
     { icon: Clock3, id: "sync" },
     { icon: Mail, id: "mail" },
     { icon: CheckCircle2, id: "ops" },
   ] as const;
 
-  // i18n 문제 문구 0..5 키 읽기 (없으면 fallback)
-  const i18nProblems: string[] = Array.from({ length: 6 }).map((_, i) =>
-    t(`ch2.problems.${i}`)
-  );
+  /* 4. 결과 섹션 데모 gif */
+  const demoLive = "/images/demo/live-status-preview.gif";
+  const demoTutor = "/images/demo/tutor-preview.gif";
 
-  // props 우선 → 없으면 스크린샷 배열로 슬라이드 구성
-  const normalizedSlides =
-    problemSlides ??
-    (problemScreenshots ?? []).slice(0, 6).map((img, i) => ({
-      text: i18nProblems[i] ?? t("ch2.problems.fallback", { index: i + 1 }),
-      image: img,
-    }));
-
-  const demoLive =
-    approachGifs?.liveStatusDemo ?? "/images/demo/live-status-preview.gif";
-  const demoTutor =
-    approachGifs?.tutorPageDemo ?? "/images/demo/tutor-preview.gif";
+  /* 5) 기술 스택 */
+  const techStack = ["Next.js", "React", "Firebase", "EmailJS"];
 
   return (
     // svh로 뷰포트 높이 기반 섹션, 가로 넘침 방지
@@ -394,7 +372,7 @@ function StepCard({
   );
 }
 
-// 데모 패널(옵션)
+// 데모 패널
 function DemoPanel({ title, media }: { title: string; media?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const lbItems = media
@@ -527,7 +505,7 @@ function ProblemSlidesCarousel({
   showArrows = true,
   showIndicators = true,
 }: {
-  items: ReadonlyArray<ProblemSlide>;
+  items: ReadonlyArray<SlideItem>;
   fillHeight?: boolean;
   showLabel?: boolean;
   showArrows?: boolean;
