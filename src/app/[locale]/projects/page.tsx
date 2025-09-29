@@ -14,22 +14,6 @@ export default async function ProjectsOnePage({
   const { locale } = await params;
   const t = await getTranslations({ locale });
 
-  // 프로젝트 별 실제 수치
-  const metrics = [
-    {
-      labelKey: "metricLabels.duplicateBookings",
-      before: 50,
-      after: 10,
-      unitKey: "units.count",
-    },
-    {
-      labelKey: "metricLabels.opsInterventionMinutes",
-      before: 120,
-      after: 48,
-      unitKey: "units.minutes",
-    },
-  ] as const;
-
   return (
     <main className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8'>
       {/* 헤더  */}
@@ -56,7 +40,7 @@ export default async function ProjectsOnePage({
         <ProjectsShowcaseSection />
       </section>
       <section id='ch3' className='scroll-mt-24'>
-        <ImpactSection metrics={[...metrics]} />
+        <ImpactSection />
       </section>
       <section id='ch4' className='scroll-mt-24'>
         <NextJoySection />

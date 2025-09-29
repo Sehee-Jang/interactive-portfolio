@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { BarChart2, Clock, Smile } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 /* 지표 카드 입력 타입: i18n 키 + 전/후 수치 + 단위 선택 */
 type MetricCard = {
@@ -90,29 +91,24 @@ const feedbacks: ReadonlyArray<FeedbackItem> = [
   },
 ] as const;
 
-const roleLabel: Record<FeedbackRole, string> = {
-  student: "수강생",
-  tutor: "튜터",
-};
+// 프로젝트 별 실제 수치
+const metrics: ReadonlyArray<MetricCard> = [
+  {
+    labelKey: "metricLabels.duplicateBookings",
+    before: 48,
+    after: 2,
+    unitKey: "units.count",
+  },
+  {
+    labelKey: "metricLabels.opsInterventionMinutes",
+    before: 98,
+    after: 12,
+    unitKey: "units.minutes",
+  },
+] satisfies ReadonlyArray<MetricCard>;
 
 export default function ImpactSection() {
   const t = useTranslations("ch3");
-
-  // 프로젝트 별 실제 수치
-  const metrics: ReadonlyArray<MetricCard> = [
-    {
-      labelKey: "metricLabels.duplicateBookings",
-      before: 48,
-      after: 2,
-      unitKey: "units.count",
-    },
-    {
-      labelKey: "metricLabels.opsInterventionMinutes",
-      before: 98,
-      after: 12,
-      unitKey: "units.minutes",
-    },
-  ] satisfies ReadonlyArray<MetricCard>;
 
   return (
     <section className='relative mx-auto max-w-5xl px-6 py-24'>
@@ -221,33 +217,26 @@ export default function ImpactSection() {
 
       {/* 2) 사용자 피드백 (말풍선) */}
       <div className='mb-24'>
-        <h3 className='mb-6 flex items-center gap-2 text-xl font-semibold'>
+        <h3 className='mb-2 flex items-center gap-2 text-xl font-semibold'>
           <Smile className='h-5 w-5' />
           {t("feedback")}
         </h3>
+        <p className='mb-6 text-sm text-muted-foreground'>
+          실제 수강생·튜터 의견 일부를 발췌했습니다.
+        </p>
 
-        {/* 고정 배열을 순회하여 말풍선 렌더링 */}
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+        {/* 레이아웃: 데스크톱 2~3열, 카드 간격 확대 */}
+        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
           {feedbacks.map((fb, i) => (
-            <motion.figure
+            <motion.div
               key={`${fb.role}-${fb.author ?? i}`}
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.35, delay: i * 0.06 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, delay: i * 0.03 }}
               viewport={{ once: true }}
-              className='rounded-2xl bg-muted px-4 py-3 shadow'
             >
-              {/* 본문: 너무 길 경우 3줄로 클램프 */}
-              <blockquote className='text-sm leading-relaxed line-clamp-3'>
-                {fb.text}
-              </blockquote>
-
-              {/* 작성자/역할 라벨 */}
-              <figcaption className='mt-2 text-xs text-muted-foreground'>
-                — {fb.author ? `${fb.author} · ` : ""}
-                {roleLabel[fb.role]}
-              </figcaption>
-            </motion.figure>
+              <FeedbackCard author={fb.author} role={fb.role} text={fb.text} />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -292,5 +281,60 @@ export default function ImpactSection() {
         </div>
       </div>
     </section>
+  );
+}
+/* 카드 컴포넌트: 접기/펼치기 + 대비 강화 */
+function FeedbackCard({
+  author,
+  role,
+  text,
+}: Readonly<{ author?: string; role: FeedbackRole; text: string }>) {
+  const [open, setOpen] = useState(false);
+  const isLong = text.length > 140;
+
+  // 역할 뱃지 색상
+  const roleBadge =
+    role === "student"
+      ? "bg-emerald-600/15 text-emerald-500 border-emerald-600/30"
+      : "bg-indigo-600/15 text-indigo-500 border-indigo-600/30";
+
+  return (
+    <figure className='rounded-2xl border border-border bg-card/90 px-5 py-4 shadow-sm hover:shadow-md transition-shadow'>
+      {/* 본문: 기본 3줄, 더 보기로 확장 */}
+      <blockquote
+        className={`text-[15px] leading-relaxed ${open ? "" : "line-clamp-3"}`}
+      >
+        “{text}”
+      </blockquote>
+
+      {/* 그라데이션 오버레이로 '더 보기' 유도 */}
+      {!open && isLong && (
+        <div className='pointer-events-none -mt-6 h-6 bg-gradient-to-t from-card to-transparent' />
+      )}
+
+      {/* 작성자/역할 */}
+      <figcaption className='mt-3 flex items-center justify-between gap-3'>
+        <div className='text-xs text-muted-foreground'>
+          — {author ? `${author} · ` : ""}
+          <span
+            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 ${roleBadge}`}
+          >
+            {role === "student" ? "수강생" : "튜터"}
+          </span>
+        </div>
+
+        {/* 더 보기 토글 */}
+        {isLong && (
+          <button
+            type='button'
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className='text-xs font-medium text-primary hover:underline'
+          >
+            {open ? "접기" : "더 보기"}
+          </button>
+        )}
+      </figcaption>
+    </figure>
   );
 }
