@@ -53,6 +53,14 @@ function useSwipe(onLeft: () => void, onRight: () => void) {
   };
   return { onPointerDown, onPointerUp };
 }
+const isVideo = (src: string) => /\.(mp4|webm|ogg|mov)$/i.test(src);
+type MediaSrc = string | { thumb: string; full: string; alt?: string };
+const toFull = (m?: MediaSrc) =>
+  !m ? null : typeof m === "string" ? m : m.full;
+const toThumb = (m?: MediaSrc) =>
+  !m ? null : typeof m === "string" ? m : m.thumb;
+const toAlt = (m?: MediaSrc, fallback?: string) =>
+  typeof m === "object" && m?.alt ? m.alt : fallback;
 
 /* ------------------------ 섹션 ------------------------ */
 
@@ -91,9 +99,15 @@ export default function ProjectsShowcaseSection() {
     { icon: CheckCircle2, id: "ops" },
   ] as const;
 
-  /* 4. 결과 섹션 데모 gif */
-  const demoLive = "/images/demo/live-status-preview.gif";
-  const demoTutor = "/images/demo/tutor-preview.gif";
+  /* 4. 결과 섹션 데모 */
+  const demoLive: MediaSrc = {
+    thumb: "/images/demo/user-preview-thumb.gif",
+    full: "/images/demo/user-preview.mp4",
+  };
+  const demoTutor: MediaSrc = {
+    thumb: "/images/demo/tutor-preview-thumb.gif",
+    full: "/images/demo/tutor-preview.mp4",
+  };
 
   /* 5) 기술 스택 */
   const techStack = ["Next.js", "React", "Firebase", "EmailJS"];
@@ -182,6 +196,7 @@ export default function ProjectsShowcaseSection() {
                 {demoLive && (
                   <DemoPanel
                     title={t("ch2.demos.liveStatus")}
+                    // media={demoLive}
                     media={demoLive}
                   />
                 )}
@@ -373,40 +388,51 @@ function StepCard({
 }
 
 // 데모 패널
-function DemoPanel({ title, media }: { title: string; media?: string }) {
+function DemoPanel({ title, media }: { title: string; media?: MediaSrc }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const lbItems = media
-    ? [{ src: media, alt: `${title} 미리보기` }]
-    : ([] as Array<{ src: string; alt?: string }>);
+  const thumb = toThumb(media);
+  const full = toFull(media);
+  const alt = toAlt(media, `${title} 미리보기`);
+  const lbItems = full ? [{ src: full, alt }] : [];
 
   return (
-    <div className='rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900 p-4 sm:p-5'>
+    <div className='rounded-2xl border bg-white dark:bg-neutral-900 p-4 sm:p-5'>
       <p className='text-sm sm:text-base font-medium'>{title}</p>
-      <div className='relative mt-3 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 h-36 sm:h-40'>
-        {media ? (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              loading='lazy'
-              src={media}
-              alt={`${title} 미리보기`}
+      <div className='relative mt-3 rounded-xl overflow-hidden border h-36 sm:h-40'>
+        {thumb ? (
+          isVideo(thumb) ? (
+            <video
+              src={thumb}
               className='w-full h-full object-cover'
-              onClick={() => setOpenIndex(0)}
+              muted
+              playsInline
+              loop
+              autoPlay
+              onClick={() => full && setOpenIndex(0)}
             />
-            <button
-              type='button'
-              aria-label='이미지 확대'
-              title='이미지 확대'
-              onClick={() => setOpenIndex(0)}
-              className='absolute right-2 top-2 inline-flex size-8 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/75 ring-1 ring-white/25'
-            >
-              <Maximize2 className='size-4' />
-            </button>
-          </>
+          ) : (
+            <img
+              src={thumb}
+              alt={alt}
+              className='w-full h-full object-cover'
+              onClick={() => full && setOpenIndex(0)}
+            />
+          )
         ) : (
           <div className='w-full h-full grid place-items-center text-xs text-neutral-500'>
             미디어
           </div>
+        )}
+
+        {full && (
+          <button
+            type='button'
+            aria-label='확대'
+            onClick={() => setOpenIndex(0)}
+            className='absolute right-2 top-2 inline-flex size-8 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/75 ring-1 ring-white/25'
+          >
+            <Maximize2 className='size-4' />
+          </button>
         )}
       </div>
 
@@ -438,6 +464,7 @@ function Lightbox({
 }) {
   if (openIndex === null) return null;
   const current = items[openIndex];
+  const video = isVideo(current.src);
 
   return (
     <div
@@ -461,11 +488,24 @@ function Lightbox({
 
         <div className='relative w-full h-[70vh] rounded-xl overflow-hidden border border-white/20 bg-black'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={current.src}
-            alt={current.alt ?? "이전 화면 확대"}
-            className='absolute inset-0 w-full h-full object-contain'
-          />
+          {video ? (
+            <video
+              className='absolute inset-0 w-full h-full object-contain'
+              controls
+              muted
+              playsInline
+              loop
+              autoPlay
+            >
+              <source src={current.src} />
+            </video>
+          ) : (
+            <img
+              src={current.src}
+              alt={current.alt ?? "확대 미디어"}
+              className='absolute inset-0 w-full h-full object-contain'
+            />
+          )}
         </div>
 
         {items.length > 1 && (
