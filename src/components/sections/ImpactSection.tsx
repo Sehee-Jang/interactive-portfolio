@@ -36,7 +36,7 @@ const feedbacks: ReadonlyArray<FeedbackItem> = [
   {
     author: "박경희",
     role: "student",
-    text: "예약 가능한 시간이 명확하게 보임, 실시간 예약 현황이 보기 쉬움, 예약 수정·취소가 쉬웠다는 의견 다수",
+    text: "예약 가능한 시간이 명확하게 보임, 실시간 예약 현황이 보기 쉬움, 예약 수정·취소가 쉬웠어요.",
   },
   {
     author: "배유림",
