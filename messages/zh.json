@@ -52,10 +52,14 @@
       "email": "预约确认邮件"
     },
     "result": "无论是运营还是体验，一切都变得更加喜悦。",
-    "timeline": {
+    "results": {
       "sync": { "label": "实时同步预约状态", "sub": "立即屏蔽重复/不可用时段" },
       "mail": { "label": "导师自动邮件", "sub": "预约/修改/取消通知" },
       "ops": { "label": "减少运营介入", "sub": "自动化重复性工作" }
+    },
+    "demos": {
+      "liveStatus": "实时预约状态预览",
+      "tutorPreview": "导师页面预览"
     }
   },
   "ch3": {

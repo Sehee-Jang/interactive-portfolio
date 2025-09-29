@@ -60,7 +60,7 @@
       "email": "Confirmation email"
     },
     "result": "Both operations and experiences have become more joyful.",
-    "timeline": {
+    "results": {
       "sync": {
         "label": "Live availability sync",
         "sub": "Instantly block duplicates/unavailable slots"
@@ -73,6 +73,10 @@
         "label": "Less ops intervention",
         "sub": "Automate repetitive tasks"
       }
+    },
+    "demos": {
+      "liveStatus": "Live booking status preview",
+      "tutorPreview": "Tutor page preview"
     }
   },
   "ch3": {
