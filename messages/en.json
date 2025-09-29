@@ -41,8 +41,38 @@
   "ch2": {
     "title": "The Process of Realizing Joy",
     "problem": "At the starting point of a dull journey, the problems were clear.",
+    "problems": {
+      "0": "Hard to see each tutor’s working hours at a glance",
+      "1": "Hard to view overall booking status at a glance",
+      "2": "Working hours and available slots are separated, causing confusion and extra checks",
+      "3": "Difficult to reflect each tutor’s working hours/holidays",
+      "4": "Real-time status not reflected → risk of double booking",
+      "5": "Manual checks/contacts by ops cause slow responses",
+      "fallback": "Problem {index}"
+    },
     "approach": "I designed each step of the user’s journey with joy.",
-    "result": "Both operations and experiences have become more joyful."
+    "steps": {
+      "chooseTutor": "Choose Tutor",
+      "chooseTime": "Pick Time",
+      "fillForm": "Fill Reservation",
+      "liveStatus": "Live Availability",
+      "editReservation": "Edit Reservation"
+    },
+    "result": "Both operations and experiences have become more joyful.",
+    "timeline": {
+      "sync": {
+        "label": "Live availability sync",
+        "sub": "Instantly block duplicates/unavailable slots"
+      },
+      "mail": {
+        "label": "Automatic tutor emails",
+        "sub": "Notify on create/update/cancel"
+      },
+      "ops": {
+        "label": "Less ops intervention",
+        "sub": "Automate repetitive tasks"
+      }
+    }
   },
   "ch3": {
     "title": "Traces of Joy",
