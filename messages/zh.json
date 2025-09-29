@@ -51,6 +51,15 @@
       "editReservation": "修改预约",
       "email": "预约确认邮件"
     },
+    "impact": "喜悦不只属于用户，也扩散到整个团队。",
+    "timeline": {
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "ops": {
+        "before": "运营方手动确认与调整预约",
+        "after": "自动邮件通知与管理员页面自动化"
+      }
+    },
     "result": "无论是运营还是体验，一切都变得更加喜悦。",
     "results": {
       "sync": { "label": "实时同步预约状态", "sub": "立即屏蔽重复/不可用时段" },
@@ -66,11 +75,10 @@
     "title": "喜悦留下的痕迹",
     "metrics": "改变既能用数字证明，也能用感受证明。",
     "metricsLabel": "核心指标",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
     "feedback": "人们的喜悦就是结果。",
-    "impact": "喜悦不只属于用户，也扩散到整个团队。",
     "messageHeadline": "我做出的细小改变，让某人的一天更愉快。",
-    "beforeLabel": "之前",
-    "afterLabel": "之后",
     "roles": {
       "student": "学员",
       "tutor": "导师"
@@ -78,10 +86,6 @@
     "feedbackItems": {
       "student1": "预约与修改变得更方便了。",
       "tutor1": "通过休息日设置，排班更轻松。"
-    },
-    "ops": {
-      "before": "运营手动核对与调整预约",
-      "after": "自动邮件提醒与管理后台自动化"
     },
     "metricLabels": {
       "duplicateBookings": "重复预约数量",

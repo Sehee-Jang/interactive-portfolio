@@ -59,6 +59,15 @@
       "editReservation": "予約の変更",
       "email": "予約確認メール"
     },
+    "impact": "喜びはユーザーだけでなくチーム全体へ広がります。",
+    "timeline": {
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "ops": {
+        "before": "運営が手動で予約確認・調整",
+        "after": "自動メール通知と管理者ページの自動化"
+      }
+    },
     "result": "運営も、体験も、すべてがより喜びに変わりました。",
     "results": {
       "sync": {
@@ -80,11 +89,10 @@
     "title": "喜びが残した軌跡",
     "metrics": "変化は数字でも感情でも証明できます。",
     "metricsLabel": "成果指標",
-    "feedback": "人々の喜びこそ成果です。",
-    "impact": "喜びはユーザーだけでなくチーム全体へ広がります。",
-    "messageHeadline": "私が作った小さな変化が、誰かの一日をもっと楽しくしました。",
     "beforeLabel": "Before",
     "afterLabel": "After",
+    "feedback": "人々の喜びこそ成果です。",
+    "messageHeadline": "私が作った小さな変化が、誰かの一日をもっと楽しくしました。",
     "roles": {
       "student": "受講生",
       "tutor": "チューター"
@@ -93,10 +101,7 @@
       "student1": "予約・変更がとても簡単になりました。",
       "tutor1": "休業設定でスケジュール管理が楽になりました。"
     },
-    "ops": {
-      "before": "運営が手動で予約確認・調整",
-      "after": "自動メール通知と管理ページの自動化"
-    },
+
     "metricLabels": {
       "duplicateBookings": "重複予約件数",
       "opsInterventionMinutes": "運営介入時間"

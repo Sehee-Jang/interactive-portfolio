@@ -59,6 +59,15 @@
       "editReservation": "Edit Reservation",
       "email": "Confirmation email"
     },
+    "impact": "Joy extends beyond users to the whole team.",
+    "timeline": {
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "ops": {
+        "before": "Manual booking checks & adjustments by ops",
+        "after": "Automated email alerts and an admin dashboard"
+      }
+    },
     "result": "Both operations and experiences have become more joyful.",
     "results": {
       "sync": {
@@ -75,6 +84,7 @@
       }
     },
     "demos": {
+      "title": "Preview Demos",
       "liveStatus": "Live booking status preview",
       "tutorPreview": "Tutor page preview"
     }
@@ -83,11 +93,10 @@
     "title": "Traces of Joy",
     "metrics": "Change is proven both in numbers and feelings.",
     "metricsLabel": "Key Metrics",
-    "feedback": "People’s joy is the real result.",
-    "impact": "Joy extends beyond users to the whole team.",
-    "messageHeadline": "Small changes I built made someone’s day more joyful.",
     "beforeLabel": "Before",
     "afterLabel": "After",
+    "feedback": "People’s joy is the real result.",
+    "messageHeadline": "Small changes I built made someone’s day more joyful.",
     "roles": {
       "student": "Student",
       "tutor": "Tutor"
@@ -96,10 +105,7 @@
       "student1": "Booking and editing got much easier.",
       "tutor1": "Day-off settings made scheduling simple."
     },
-    "ops": {
-      "before": "Ops team manually verified and adjusted bookings",
-      "after": "Automated email alerts and admin workflows"
-    },
+
     "metricLabels": {
       "duplicateBookings": "Duplicate bookings",
       "opsInterventionMinutes": "Ops intervention time"

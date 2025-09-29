@@ -57,6 +57,16 @@
       "editReservation": "예약 수정",
       "email": "예약 확인 이메일"
     },
+    "impact": "기쁨은 사용자뿐 아니라 팀 전체로 확장됩니다.",
+    "timeline": {
+      "beforeLabel": "Before",
+      "afterLabel": "After",
+      "ops": {
+        "before": "운영진이 수동으로 예약 확인·조정",
+        "after": "자동 이메일 알림과 관리자 페이지 자동화"
+      }
+    },
+
     "result": "운영도, 경험도, 모두 더 기쁘게 달라졌습니다.",
     "results": {
       "sync": {
@@ -70,6 +80,7 @@
       "ops": { "label": "운영진 개입 감소", "sub": "반복 작업 자동화" }
     },
     "demos": {
+      "title": "미리보기 데모",
       "liveStatus": "실시간 예약 현황 미리보기",
       "tutorPreview": "튜터 페이지 미리보기"
     }
@@ -78,11 +89,10 @@
     "title": "기쁨이 남긴 흔적",
     "metrics": "변화는 숫자로도, 감정으로도 증명됩니다.",
     "metricsLabel": "성과 지표",
-    "feedback": "사람들의 기쁨이 곧 결과입니다.",
-    "impact": "기쁨은 사용자뿐 아니라 팀 전체로 확장됩니다.",
-    "messageHeadline": "제가 만든 작은 변화가, 누군가의 하루를 더 즐겁게 바꿨습니다.",
     "beforeLabel": "Before",
     "afterLabel": "After",
+    "feedback": "사람들의 기쁨이 곧 결과입니다.",
+    "messageHeadline": "제가 만든 작은 변화가, 누군가의 하루를 더 즐겁게 바꿨습니다.",
     "roles": {
       "student": "수강생",
       "tutor": "튜터"
@@ -91,10 +101,7 @@
       "student1": "예약·수정이 간편해졌어요",
       "tutor1": "휴무 설정으로 일정 관리가 쉬워졌습니다"
     },
-    "ops": {
-      "before": "운영진이 수동으로 예약 확인·조정",
-      "after": "자동 이메일 알림과 관리자 페이지 자동화"
-    },
+
     "metricLabels": {
       "duplicateBookings": "중복 예약 건수",
       "opsInterventionMinutes": "운영 개입 시간"
