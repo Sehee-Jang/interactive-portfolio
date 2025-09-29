@@ -55,9 +55,23 @@
     "timeline": {
       "beforeLabel": "Before",
       "afterLabel": "After",
-      "ops": {
-        "before": "运营方手动确认与调整预约",
-        "after": "自动邮件通知与管理员页面自动化"
+      "items": {
+        "availability": {
+          "before": "运营方手动确认导师的值班/休假",
+          "after": "自动同步值班与休假，只显示可用时段"
+        },
+        "dedup": {
+          "before": "同一时间段出现重复预约",
+          "after": "预约确认后立即锁定时段（防止重复）"
+        },
+        "notify": {
+          "before": "通过聊天逐一通知变更或取消",
+          "after": "自动化邮件通知"
+        },
+        "prep": {
+          "before": "临时提问导致导师难以及时准备",
+          "after": "通过事前提问表单，导师可提前做好准备"
+        }
       }
     },
     "result": "无论是运营还是体验，一切都变得更加喜悦。",

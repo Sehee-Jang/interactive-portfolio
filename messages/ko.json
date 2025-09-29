@@ -61,12 +61,25 @@
     "timeline": {
       "beforeLabel": "Before",
       "afterLabel": "After",
-      "ops": {
-        "before": "운영진이 수동으로 예약 확인·조정",
-        "after": "자동 이메일 알림과 관리자 페이지 자동화"
+      "items": {
+        "availability": {
+          "before": "튜터 근무/휴무를 수기로 확인",
+          "after": "근무표·휴무 연동으로 가용 슬롯만 자동 표시"
+        },
+        "dedup": {
+          "before": "같은 시간대 중복 예약 발생",
+          "after": "예약 확정 시 슬롯 즉시 잠금(중복 차단)"
+        },
+        "notify": {
+          "before": "변경·취소를 채팅으로 개별 전달",
+          "after": "이메일 알림 자동화"
+        },
+        "prep": {
+          "before": "즉석 질문으로 상담 준비 어려움",
+          "after": "사전 질문 폼으로 튜터가 미리 준비"
+        }
       }
     },
-
     "result": "운영도, 경험도, 모두 더 기쁘게 달라졌습니다.",
     "results": {
       "sync": {

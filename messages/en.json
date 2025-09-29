@@ -63,9 +63,23 @@
     "timeline": {
       "beforeLabel": "Before",
       "afterLabel": "After",
-      "ops": {
-        "before": "Manual booking checks & adjustments by ops",
-        "after": "Automated email alerts and an admin dashboard"
+      "items": {
+        "availability": {
+          "before": "Ops manually checked tutors’ shifts/off days",
+          "after": "Only available slots shown via shift/off-day sync"
+        },
+        "dedup": {
+          "before": "Double bookings in the same timeslot",
+          "after": "Atomic slot lock on confirmation"
+        },
+        "notify": {
+          "before": "Changes/cancellations announced in chat",
+          "after": "Automated email notifications"
+        },
+        "prep": {
+          "before": "Ad-hoc questions hindered tutor prep",
+          "after": "Pre-question form enables prior preparation"
+        }
       }
     },
     "result": "Both operations and experiences have become more joyful.",

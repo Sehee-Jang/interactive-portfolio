@@ -23,6 +23,15 @@ type SlideItem = Readonly<{
   image?: { src: string; alt?: string };
 }>;
 
+// 타입
+type TimelineItemKey = "availability" | "dedup" | "notify" | "prep";
+
+const timelineItems: ReadonlyArray<TimelineItemKey> = [
+  "availability",
+  "dedup",
+  "notify",
+  "prep",
+];
 /* ------------------------ 유틸 훅 ------------------------ */
 // 최초 1회만 in-view 판정하여 등장 애니메이션 트리거
 function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
@@ -179,50 +188,39 @@ export default function ProjectsShowcaseSection() {
               badge='Chapter 2-3'
             />
 
-            <div className='relative border-l border-black/10 dark:border-white/10 pl-6'>
-              {/* Before */}
-              <div className='mb-10 relative'>
-                <span className='absolute -left-3 top-1.5 block size-3 rounded-full bg-neutral-400' />
-                <p className='text-xs font-medium text-neutral-500'>
-                  {t("timeline.beforeLabel")}
-                </p>
-                <p className='mt-0.5 text-sm sm:text-base font-semibold'>
-                  {t(timeline.beforeKey)}
-                </p>
-              </div>
+            <div className='relative pl-6'>
+              <div className='absolute left-0 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10' />
+              {timelineItems.map((id) => (
+                <div key={id} className='relative mb-7 last:mb-0'>
+                  {/* Before */}
+                  <span className='absolute -left-3 top-3 block size-3 rounded-full bg-neutral-400' />
+                  <p className='mb-1 text-xs font-medium text-neutral-500'>
+                    {t("timeline.beforeLabel")}
+                  </p>
+                  <div className='rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/70 px-3.5 py-3'>
+                    <p className='text-sm sm:text-base font-semibold'>
+                      {t(`timeline.items.${id}.before`)}
+                    </p>
+                  </div>
 
-              {/* After */}
-              <div className='relative'>
-                <span className='absolute -left-3 top-1.5 block size-3 rounded-full bg-emerald-500' />
-                <p className='text-xs font-medium text-emerald-600'>
-                  {t("timeline.afterLabel")}
-                </p>
-                <p className='mt-0.5 text-sm sm:text-base font-semibold'>
-                  {t(timeline.afterKey)}
-                </p>
-              </div>
-            </div>
-
-            <div className='mt-6 flex flex-wrap items-center gap-3'>
-              <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
-                <CheckCircle2 className='size-4' />
-                Chapter Cleared
-              </span>
-              <ChevronRight className='size-4 opacity-60' />
-              <div className='flex flex-wrap gap-2'>
-                {techStack.map((t) => (
-                  <span
-                    key={t}
-                    className='inline-flex items-center rounded-full border px-2.5 py-1 text-xs sm:text-sm text-black/70 dark:text-white/70'
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+                  {/* After */}
+                  <div className='relative mt-4'>
+                    <span className='absolute -left-3 top-3 block size-3 rounded-full bg-emerald-500' />
+                    <p className='mb-1 text-xs font-medium text-emerald-600'>
+                      {t("timeline.afterLabel")}
+                    </p>
+                    <div className='rounded-xl border border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-900/10 px-3.5 py-3'>
+                      <p className='text-sm sm:text-base font-semibold'>
+                        {t(`timeline.items.${id}.after`)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </Slide>
 
-          {/* 4) 미리보기 데모 분리 */}
+          {/* 4) 미리보기 데모 */}
           <Slide ariaLabel='데모 미리보기'>
             <SlideHeader
               icon={CheckCircle2}
@@ -267,6 +265,24 @@ export default function ProjectsShowcaseSection() {
                 )}
               </div>
             )}
+
+            <div className='mt-6 flex flex-wrap items-center gap-3'>
+              <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
+                <CheckCircle2 className='size-4' />
+                Chapter Cleared
+              </span>
+              <ChevronRight className='size-4 opacity-60' />
+              <div className='flex flex-wrap gap-2'>
+                {techStack.map((t) => (
+                  <span
+                    key={t}
+                    className='inline-flex items-center rounded-full border px-2.5 py-1 text-xs sm:text-sm text-black/70 dark:text-white/70'
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
           </Slide>
         </div>
 
