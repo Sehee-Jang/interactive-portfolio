@@ -240,46 +240,6 @@ export default function ImpactSection() {
           ))}
         </div>
       </div>
-
-      {/* 3) 조직 임팩트 (타임라인) */}
-      <div>
-        <h3 className='mb-6 flex items-center gap-2 text-xl font-semibold'>
-          <Clock className='h-5 w-5' />
-          {t("impact")}
-        </h3>
-
-        {/* 좌측 라인 타임라인 레이아웃 */}
-        <div className='relative border-l border-border pl-6'>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.45 }}
-            viewport={{ once: true }}
-            className='mb-10'
-          >
-            {/* 타임라인 노드 */}
-            <span className='absolute -left-3 top-1.5 h-3 w-3 rounded-full bg-gray-400' />
-            <p className='text-sm font-medium text-muted-foreground'>
-              {t("beforeLabel")}
-            </p>
-            <p className='font-bold'>{t("ops.before")}</p>
-          </motion.div>
-
-          {/* After 상태 */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.45, delay: 0.15 }}
-            viewport={{ once: true }}
-          >
-            <span className='absolute -left-3 top-1.5 h-3 w-3 rounded-full bg-green-500' />
-            <p className='text-sm font-medium text-green-600'>
-              {t("afterLabel")}
-            </p>
-            <p className='font-bold'>{t("ops.after")}</p>
-          </motion.div>
-        </div>
-      </div>
     </section>
   );
 }
