@@ -56,7 +56,8 @@
       "chooseTime": "Pick Time",
       "fillForm": "Fill Reservation",
       "liveStatus": "Live Availability",
-      "editReservation": "Edit Reservation"
+      "editReservation": "Edit Reservation",
+      "email": "Confirmation email"
     },
     "result": "Both operations and experiences have become more joyful.",
     "timeline": {

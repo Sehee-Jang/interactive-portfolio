@@ -48,7 +48,8 @@
       "chooseTime": "选择时间",
       "fillForm": "填写预约",
       "liveStatus": "实时预约状态",
-      "editReservation": "修改预约"
+      "editReservation": "修改预约",
+      "email": "预约确认邮件"
     },
     "result": "无论是运营还是体验，一切都变得更加喜悦。",
     "timeline": {

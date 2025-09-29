@@ -56,7 +56,8 @@
       "chooseTime": "時間選択",
       "fillForm": "予約入力",
       "liveStatus": "予約状況のリアルタイム",
-      "editReservation": "予約の変更"
+      "editReservation": "予約の変更",
+      "email": "予約確認メール"
     },
     "result": "運営も、体験も、すべてがより喜びに変わりました。",
     "timeline": {

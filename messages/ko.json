@@ -54,7 +54,8 @@
       "chooseTime": "시간 선택",
       "fillForm": "예약 입력",
       "liveStatus": "실시간 예약 현황",
-      "editReservation": "예약 수정"
+      "editReservation": "예약 수정",
+      "email": "예약 확인 이메일"
     },
     "result": "운영도, 경험도, 모두 더 기쁘게 달라졌습니다.",
     "timeline": {
