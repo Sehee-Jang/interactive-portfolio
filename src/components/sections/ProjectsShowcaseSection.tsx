@@ -37,6 +37,7 @@ interface ProjectsShowcaseSectionProps {
     text: string;
     image?: { src: string; alt?: string };
   }>;
+
   // 사용 기술 뱃지
   techStack?: string[];
 }
@@ -86,16 +87,16 @@ export default function ProjectsShowcaseSection({
 
   // 접근 단계 카드 정의 (정적 경로 기반 데모 GIF)
   const steps = [
-    { key: "chooseTutor", media: "/images/approach/choose-tutor.gif" },
-    { key: "chooseTime", media: "/images/approach/choose-time.gif" },
-    { key: "fillForm", media: "/images/approach/fill-form.gif" },
-    { key: "liveStatus", media: "/images/approach/live-status.gif" },
-    { key: "editReservation", media: "/images/approach/edit-reservation.gif" },
-    { key: "email", media: "/images/approach/email.gif" },
+    { key: "chooseTutor", media: "/images/demo/choose-tutor.gif" },
+    { key: "chooseTime", media: "/images/demo/choose-time.gif" },
+    { key: "fillForm", media: "/images/demo/fill-form.gif" },
+    { key: "liveStatus", media: "/images/demo/live-status.gif" },
+    { key: "editReservation", media: "/images/demo/edit-reservation.gif" },
+    { key: "email", media: "/images/demo/email.gif" },
   ] as const;
 
   // 결과 타임라인(아이콘+텍스트 i18n 키)
-  const timeline = [
+  const results = [
     { icon: Clock3, id: "sync" },
     { icon: Mail, id: "mail" },
     { icon: CheckCircle2, id: "ops" },
@@ -114,6 +115,11 @@ export default function ProjectsShowcaseSection({
       image: img,
     }));
 
+  const demoLive =
+    approachGifs?.liveStatusDemo ?? "/images/demo/live-status-preview.gif";
+  const demoTutor =
+    approachGifs?.tutorPageDemo ?? "/images/demo/tutor-preview.gif";
+
   return (
     // svh로 뷰포트 높이 기반 섹션, 가로 넘침 방지
     <div className='min-h-svh grid place-items-center overflow-x-hidden'>
@@ -129,11 +135,7 @@ export default function ProjectsShowcaseSection({
 
         {/* 스냅 캐러셀: 문제 -> 접근 -> 결과 */}
         <div
-          className='
-            relative flex snap-x snap-mandatory overflow-x-auto gap-4 pb-4
-            max-w-full min-w-0 no-scrollbar
-             scroll-px-4 sm:scroll-px-0 overscroll-x-contain
-          '
+          className='relative -mx-4 px-4 flex snap-x snap-mandatory overflow-x-auto gap-3 sm:gap-4 pb-4 max-w-[100vw] no-scrollbar scroll-px-4 sm:mx-0 sm:px-0 sm:scroll-px-0 overscroll-x-contain'
           aria-label='프로젝트 여정 슬라이드'
         >
           {/* 1) 문제 제기 */}
@@ -156,7 +158,7 @@ export default function ProjectsShowcaseSection({
               badge='Chapter 2-2'
             />
             <div className='min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-gutter:stable]'>
-              <div className='grid md:grid-cols-3 gap-4 sm:gap-6'>
+              <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'>
                 {steps.map((s, i) => (
                   <StepCard
                     key={s.key}
@@ -177,7 +179,7 @@ export default function ProjectsShowcaseSection({
               badge='Chapter 2-3'
             />
             <ul className='grid gap-3 sm:gap-4'>
-              {timeline.map(({ icon: Icon, id }, i) => (
+              {results.map(({ icon: Icon, id }, i) => (
                 <Appear key={id} delay={i * 90}>
                   <li className='flex items-start gap-3 rounded-xl border ... p-4'>
                     <span className='mt-0.5 inline-flex size-6 ...'>
@@ -185,10 +187,10 @@ export default function ProjectsShowcaseSection({
                     </span>
                     <div>
                       <p className='text-sm sm:text-base font-medium'>
-                        {t(`ch2.timeline.${id}.label`)}
+                        {t(`ch2.results.${id}.label`)}
                       </p>
                       <p className='text-xs sm:text-sm text-black/60 dark:text-white/60'>
-                        {t(`ch2.timeline.${id}.sub`)}
+                        {t(`ch2.results.${id}.sub`)}
                       </p>
                     </div>
                   </li>
@@ -196,17 +198,23 @@ export default function ProjectsShowcaseSection({
               ))}
             </ul>
 
-            {/* 데모 패널 */}
-            <div className='mt-6 grid md:grid-cols-2 gap-4 sm:gap-6'>
-              <DemoPanel
-                title='실시간 예약 현황 데모'
-                media={approachGifs?.liveStatusDemo}
-              />
-              <DemoPanel
-                title='튜터 페이지 미리보기'
-                media={approachGifs?.tutorPageDemo}
-              />
-            </div>
+            {/* 결과/영향 데모: 실시간 예약 현황 + 튜터 페이지 미리보기 */}
+            {(demoLive || demoTutor) && (
+              <div className='mt-6 grid sm:grid-cols-2 gap-4 sm:gap-6'>
+                {demoLive && (
+                  <DemoPanel
+                    title={t("ch2.demos.liveStatus")}
+                    media={demoLive}
+                  />
+                )}
+                {demoTutor && (
+                  <DemoPanel
+                    title={t("ch2.demos.tutorPreview")}
+                    media={demoTutor}
+                  />
+                )}
+              </div>
+            )}
 
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
@@ -250,7 +258,9 @@ function Slide({
       role='group'
       aria-label={ariaLabel}
       className='
-        snap-center shrink-0 w-[calc(100%-1rem)] sm:w-[92%] lg:w-[88%]
+        snap-start sm:snap-center shrink-0 min-w-0
+        basis-[86%] sm:basis-[92%] lg:basis-[88%]
+        w-[calc(100%-2rem)] sm:w-[92%] lg:w-[88%]
         rounded-2xl border border-black/10 dark:border-white/10
         bg-white/60 dark:bg-neutral-900/60
         p-4 sm:p-5 lg:p-6
@@ -334,7 +344,7 @@ function StepCard({
       ref={ref}
       className={`
         rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900
-        p-4 sm:p-5 flex flex-col gap-3 transition
+        p-4 flex flex-col gap-3 transition
         ${shown ? "shadow-md" : "opacity-80"}
       `}
     >
@@ -345,7 +355,7 @@ function StepCard({
         <p className='text-sm sm:text-base font-medium'>{title}</p>
       </div>
 
-      <div className='relative rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800 h-28 sm:h-32'>
+      <div className='relative rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800 aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] min-h-[8rem] sm:min-h-[9.5rem] md:min-h-[11rem]'>
         {media ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -399,6 +409,7 @@ function DemoPanel({ title, media }: { title: string; media?: string }) {
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              loading='lazy'
               src={media}
               alt={`${title} 미리보기`}
               className='w-full h-full object-cover'
