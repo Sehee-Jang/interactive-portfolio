@@ -21,7 +21,9 @@ type ProblemSlide = Readonly<{
 }>;
 
 interface ProjectsShowcaseSectionProps {
+  // Ch.2-1 개편 전 프로젝트 스크린샷
   problemScreenshots?: ReadonlyArray<{ src: string; alt?: string }>;
+  // Ch.2-2 데모 GIF/영상(선택)
   approachGifs?: {
     chooseTutor?: string;
     chooseTime?: string;
@@ -29,15 +31,18 @@ interface ProjectsShowcaseSectionProps {
     liveStatusDemo?: string;
     tutorPageDemo?: string;
   };
+
+  // 슬라이드 텍스트/이미지를 직접 주입하고 싶을 때 사용
   problemSlides?: ReadonlyArray<{
     text: string;
     image?: { src: string; alt?: string };
   }>;
+  // 사용 기술 뱃지
   techStack?: string[];
 }
 
 /* ------------------------ 유틸 훅 ------------------------ */
-
+// 최초 1회만 in-view 판정하여 등장 애니메이션 트리거
 function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
   const ref = useRef<T | null>(null);
   const [shown, setShown] = useState(false);
@@ -55,7 +60,7 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
   }, [shown, threshold]);
   return { ref, shown } as const;
 }
-
+// 기본 좌↔우 스와이프 제스처 처리
 function useSwipe(onLeft: () => void, onRight: () => void) {
   const startX = useRef<number | null>(null);
   const onPointerDown = (e: React.PointerEvent<HTMLElement>) =>
@@ -79,24 +84,29 @@ export default function ProjectsShowcaseSection({
 }: ProjectsShowcaseSectionProps) {
   const t = useTranslations();
 
+  // 접근 단계 카드 정의 (정적 경로 기반 데모 GIF)
   const steps = [
     { key: "chooseTutor", media: "/images/approach/choose-tutor.gif" },
     { key: "chooseTime", media: "/images/approach/choose-time.gif" },
     { key: "fillForm", media: "/images/approach/fill-form.gif" },
     { key: "liveStatus", media: "/images/approach/live-status.gif" },
     { key: "editReservation", media: "/images/approach/edit-reservation.gif" },
+    { key: "email", media: "/images/approach/email.gif" },
   ] as const;
 
+  // 결과 타임라인(아이콘+텍스트 i18n 키)
   const timeline = [
     { icon: Clock3, id: "sync" },
     { icon: Mail, id: "mail" },
     { icon: CheckCircle2, id: "ops" },
   ] as const;
 
+  // i18n 문제 문구 0..5 키 읽기 (없으면 fallback)
   const i18nProblems: string[] = Array.from({ length: 6 }).map((_, i) =>
     t(`ch2.problems.${i}`)
   );
 
+  // props 우선 → 없으면 스크린샷 배열로 슬라이드 구성
   const normalizedSlides =
     problemSlides ??
     (problemScreenshots ?? []).slice(0, 6).map((img, i) => ({
@@ -105,6 +115,7 @@ export default function ProjectsShowcaseSection({
     }));
 
   return (
+    // svh로 뷰포트 높이 기반 섹션, 가로 넘침 방지
     <div className='min-h-svh grid place-items-center overflow-x-hidden'>
       <div className='w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-10'>
         <header className='mb-6 sm:mb-8'>
@@ -156,18 +167,6 @@ export default function ProjectsShowcaseSection({
                 ))}
               </div>
             </div>
-
-            {/* 데모 패널 */}
-            {/* <div className='mt-6 grid md:grid-cols-2 gap-4 sm:gap-6'>
-              <DemoPanel
-                title='실시간 예약 현황 데모'
-                media={approachGifs?.liveStatusDemo}
-              />
-              <DemoPanel
-                title='튜터 페이지 미리보기'
-                media={approachGifs?.tutorPageDemo}
-              />
-            </div> */}
           </Slide>
 
           {/* 3) 결과/영향 */}
@@ -196,6 +195,18 @@ export default function ProjectsShowcaseSection({
                 </Appear>
               ))}
             </ul>
+
+            {/* 데모 패널 */}
+            <div className='mt-6 grid md:grid-cols-2 gap-4 sm:gap-6'>
+              <DemoPanel
+                title='실시간 예약 현황 데모'
+                media={approachGifs?.liveStatusDemo}
+              />
+              <DemoPanel
+                title='튜터 페이지 미리보기'
+                media={approachGifs?.tutorPageDemo}
+              />
+            </div>
 
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
@@ -226,7 +237,7 @@ export default function ProjectsShowcaseSection({
 }
 
 /* ------------------------ 하위 컴포넌트 ------------------------ */
-
+// 개별 슬라이드 래퍼: 스냅 대상, 반응형 높이/여백/테두리
 function Slide({
   children,
   ariaLabel,
@@ -253,6 +264,7 @@ function Slide({
   );
 }
 
+// 슬라이드 상단 타이틀+뱃지
 function SlideHeader({
   icon: Icon,
   title,
@@ -263,7 +275,7 @@ function SlideHeader({
   badge: string;
 }) {
   return (
-    <div className='mb-2 sm:mb-3 flex items-center justify-between'>
+    <div className='mb-6 sm:mb-8 flex items-center justify-between'>
       <h3 className='text-lg sm:text-xl font-semibold flex items-center gap-2 leading-tight'>
         <Icon className='size-5' aria-hidden />
         {title}
@@ -275,6 +287,7 @@ function SlideHeader({
   );
 }
 
+// 인터섹션 진입 시 점진적 표시
 function Appear({
   children,
   delay = 0,
@@ -298,6 +311,7 @@ function Appear({
   );
 }
 
+// 접근 단계 카드(미디어 확대 버튼 포함)
 function StepCard({
   index,
   title,
@@ -370,6 +384,7 @@ function StepCard({
   );
 }
 
+// 데모 패널(옵션)
 function DemoPanel({ title, media }: { title: string; media?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const lbItems = media
@@ -418,7 +433,7 @@ function DemoPanel({ title, media }: { title: string; media?: string }) {
 }
 
 /* ------------------------ 라이트박스 ------------------------ */
-
+// 단순 라이트박스: 오버레이 클릭 닫기, 이미지 컨테인이며 키보드는 상위에서 처리
 function Lightbox({
   openIndex,
   items,
@@ -493,7 +508,7 @@ function Lightbox({
 }
 
 /* ------------------------ 이미지 캐러셀 ------------------------ */
-
+// 문제 슬라이드 캐러셀: 키보드/스와이프/클릭 확대, 인디케이터 포함
 function ProblemSlidesCarousel({
   items,
   fillHeight = false,
