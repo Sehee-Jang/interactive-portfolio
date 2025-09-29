@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
 import {
   AlertTriangle,
   Wand2,
@@ -12,6 +13,7 @@ import {
   X,
   ChevronLeft,
   Maximize2,
+  Clock,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -65,7 +67,7 @@ const toAlt = (m?: MediaSrc, fallback?: string) =>
 /* ------------------------ 섹션 ------------------------ */
 
 export default function ProjectsShowcaseSection() {
-  const t = useTranslations();
+  const t = useTranslations("ch2");
 
   /* 1. 문제 슬라이드 */
   const problems = [
@@ -78,8 +80,8 @@ export default function ProjectsShowcaseSection() {
   ] as const;
 
   const normalizedSlides: ReadonlyArray<SlideItem> = problems.map((p) => ({
-    text: t(`ch2.problems.${p.key}`),
-    image: { src: p.media, alt: t(`ch2.problems.${p.key}`) },
+    text: t(`problems.${p.key}`),
+    image: { src: p.media, alt: t(`problems.${p.key}`) },
   }));
 
   /* 2. 접근 단계 카드(GIF 기본 경로) */
@@ -93,13 +95,19 @@ export default function ProjectsShowcaseSection() {
   ] as const;
 
   /* 3. 결과 타임라인 */
+  const timeline = {
+    beforeKey: "timeline.ops.before",
+    afterKey: "timeline.ops.after",
+  } as const;
+
+  /* 4. 결과 타임라인 */
   const results = [
     { icon: Clock3, id: "sync" },
     { icon: Mail, id: "mail" },
     { icon: CheckCircle2, id: "ops" },
   ] as const;
 
-  /* 4. 결과 섹션 데모 */
+  /* 5. 결과 섹션 데모 */
   const demoLive: MediaSrc = {
     thumb: "/images/demo/user-preview-thumb.gif",
     full: "/images/demo/user-preview.mp4",
@@ -118,10 +126,10 @@ export default function ProjectsShowcaseSection() {
       <div className='w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-10'>
         <header className='mb-6 sm:mb-8'>
           <h2 className='text-[22px] sm:text-3xl font-semibold tracking-tight'>
-            {t("ch2.title")}
+            {t("title")}
           </h2>
           <p className='mt-2 text-sm sm:text-base text-black/60 dark:text-white/60'>
-            {t("ch2.messageHeadline")}
+            {t("messageHeadline")}
           </p>
         </header>
 
@@ -134,7 +142,7 @@ export default function ProjectsShowcaseSection() {
           <Slide ariaLabel='문제 제기'>
             <SlideHeader
               icon={AlertTriangle}
-              title={t("ch2.problem")}
+              title={t("problem")}
               badge='Chapter 2-1'
             />
             <div className='flex-1 min-h-0 overflow-hidden'>
@@ -146,7 +154,7 @@ export default function ProjectsShowcaseSection() {
           <Slide ariaLabel='나의 접근'>
             <SlideHeader
               icon={Wand2}
-              title={t("ch2.approach")}
+              title={t("approach")}
               badge='Chapter 2-2'
             />
             <div className='min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-gutter:stable]'>
@@ -155,7 +163,7 @@ export default function ProjectsShowcaseSection() {
                   <StepCard
                     key={s.key}
                     index={i + 1}
-                    title={t(`ch2.steps.${s.key}`)}
+                    title={t(`steps.${s.key}`)}
                     media={s.media}
                   />
                 ))}
@@ -167,47 +175,33 @@ export default function ProjectsShowcaseSection() {
           <Slide ariaLabel='결과와 영향'>
             <SlideHeader
               icon={PartyPopper}
-              title={t("ch2.result")}
+              title={t("result")}
               badge='Chapter 2-3'
             />
-            <ul className='grid gap-3 sm:gap-4'>
-              {results.map(({ icon: Icon, id }, i) => (
-                <Appear key={id} delay={i * 90}>
-                  <li className='flex items-start gap-3 rounded-xl border ... p-4'>
-                    <span className='mt-0.5 inline-flex size-6 ...'>
-                      <Icon className='size-4' aria-hidden />
-                    </span>
-                    <div>
-                      <p className='text-sm sm:text-base font-medium'>
-                        {t(`ch2.results.${id}.label`)}
-                      </p>
-                      <p className='text-xs sm:text-sm text-black/60 dark:text-white/60'>
-                        {t(`ch2.results.${id}.sub`)}
-                      </p>
-                    </div>
-                  </li>
-                </Appear>
-              ))}
-            </ul>
 
-            {/* 결과/영향 데모: 실시간 예약 현황 + 튜터 페이지 미리보기 */}
-            {(demoLive || demoTutor) && (
-              <div className='mt-6 grid sm:grid-cols-2 gap-4 sm:gap-6'>
-                {demoLive && (
-                  <DemoPanel
-                    title={t("ch2.demos.liveStatus")}
-                    // media={demoLive}
-                    media={demoLive}
-                  />
-                )}
-                {demoTutor && (
-                  <DemoPanel
-                    title={t("ch2.demos.tutorPreview")}
-                    media={demoTutor}
-                  />
-                )}
+            <div className='relative border-l border-black/10 dark:border-white/10 pl-6'>
+              {/* Before */}
+              <div className='mb-10 relative'>
+                <span className='absolute -left-3 top-1.5 block size-3 rounded-full bg-neutral-400' />
+                <p className='text-xs font-medium text-neutral-500'>
+                  {t("timeline.beforeLabel")}
+                </p>
+                <p className='mt-0.5 text-sm sm:text-base font-semibold'>
+                  {t(timeline.beforeKey)}
+                </p>
               </div>
-            )}
+
+              {/* After */}
+              <div className='relative'>
+                <span className='absolute -left-3 top-1.5 block size-3 rounded-full bg-emerald-500' />
+                <p className='text-xs font-medium text-emerald-600'>
+                  {t("timeline.afterLabel")}
+                </p>
+                <p className='mt-0.5 text-sm sm:text-base font-semibold'>
+                  {t(timeline.afterKey)}
+                </p>
+              </div>
+            </div>
 
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
@@ -226,6 +220,53 @@ export default function ProjectsShowcaseSection() {
                 ))}
               </div>
             </div>
+          </Slide>
+
+          {/* 4) 미리보기 데모 분리 */}
+          <Slide ariaLabel='데모 미리보기'>
+            <SlideHeader
+              icon={CheckCircle2}
+              title={t("demos.title")}
+              badge='Chapter 2-4'
+            />
+            {/* <ul className='grid gap-3 sm:gap-4'>
+              {results.map(({ icon: Icon, id }, i) => (
+                <Appear key={id} delay={i * 90}>
+                  <li className='flex items-start gap-3 rounded-xl border ... p-4'>
+                    <span className='mt-0.5 inline-flex size-6 ...'>
+                      <Icon className='size-4' aria-hidden />
+                    </span>
+                    <div>
+                      <p className='text-sm sm:text-base font-medium'>
+                        {t(`results.${id}.label`)}
+                      </p>
+                      <p className='text-xs sm:text-sm text-black/60 dark:text-white/60'>
+                        {t(`results.${id}.sub`)}
+                      </p>
+                    </div>
+                  </li>
+                </Appear>
+              ))}
+            </ul> */}
+
+            {/* 결과/영향 데모: 실시간 예약 현황 + 튜터 페이지 미리보기 */}
+            {(demoLive || demoTutor) && (
+              <div className='mt-6 grid sm:grid-cols-2 gap-4 sm:gap-6'>
+                {demoLive && (
+                  <DemoPanel
+                    title={t("demos.liveStatus")}
+                    // media={demoLive}
+                    media={demoLive}
+                  />
+                )}
+                {demoTutor && (
+                  <DemoPanel
+                    title={t("demos.tutorPreview")}
+                    media={demoTutor}
+                  />
+                )}
+              </div>
+            )}
           </Slide>
         </div>
 
