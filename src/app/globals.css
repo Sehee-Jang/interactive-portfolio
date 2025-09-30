@@ -273,3 +273,27 @@ button,
   transform: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
+
+@keyframes marquee-down {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes marquee-up {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.animate-marquee-down {
+  animation: marquee-down 28s linear infinite;
+}
+.animate-marquee-up {
+  animation: marquee-up 28s linear infinite;
+}
