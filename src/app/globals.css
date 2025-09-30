@@ -42,6 +42,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --appbar-h: 56px; /* 헤더(AppBar) 높이 */
+  --inpage-h: 44px; /* InPageNav 높이(대략) */
 }
 
 .dark {
@@ -80,6 +82,33 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* 해시 이동 시 상단에 가리지 않도록 전체 스크롤 보정 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--appbar-h) + var(--inpage-h) + 12px);
+}
+
+/* 섹션 자체도 여유를 줌(앵커가 헤더/탭에 숨지 않게) */
+section[id],
+div[id] {
+  scroll-margin-top: calc(var(--appbar-h) + var(--inpage-h) + 12px);
+}
+
+/* 스크롤바 숨김 유틸(모바일/데스크탑 동일) */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 포커스 링(가독 좋은 파란 링) */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+  border-radius: 8px;
+}
 /* ===========================
    Body Reset & Typography
    =========================== */

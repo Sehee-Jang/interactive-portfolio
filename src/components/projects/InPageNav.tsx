@@ -1,196 +1,168 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 
-type SectionDef = { id: string; labelKey: string };
+/* 네비가 제어할 섹션 id 타입 고정 */
+type SectionId = "ch1" | "ch2" | "ch3" | "ch4";
+/* 섹션 정의: id와 i18n 라벨 키(축약 네비 라벨) */
+type Section = { id: SectionId; labelKey: `ch${1 | 2 | 3 | 4}.nav` };
 
-interface InPageNavProps {
-  sections: readonly SectionDef[];
-  top?: number; // sticky 위치 미세 조정 (px), 기본 16px
-}
-
-export default function InPageNav({ sections, top = 16 }: InPageNavProps) {
+export default function InPageNav() {
   const t = useTranslations();
 
-  // 현재 활성화된 섹션 id
-  const [active, setActive] = useState<string>(sections[0]?.id ?? "");
-
-  // 하단 활성 인디케이터(left/width)
-  const [indicator, setIndicator] = useState<{ left: number; width: number }>({
-    left: 0,
-    width: 0,
-  });
-
-  // 각 탭 앵커 요소를 id별로 보관
-  const refs = useRef<Record<string, HTMLAnchorElement | null>>({});
-
-  // 각 섹션의 교차 상태(비율, 화면상단까지의 거리)를 저장
-  const visibleMapRef = useRef<Record<string, { ratio: number; top: number }>>(
-    {}
+  /* 네비용 섹션 목록: 재생성 방지 */
+  const sections: readonly Section[] = useMemo(
+    () => [
+      { id: "ch1", labelKey: "ch1.nav" },
+      { id: "ch2", labelKey: "ch2.nav" },
+      { id: "ch3", labelKey: "ch3.nav" },
+      { id: "ch4", labelKey: "ch4.nav" },
+    ],
+    []
   );
 
-  // 섹션을 관찰하여 화면 상단에 가장 가까운 섹션을 active로 지정
+  /* 초기 활성 섹션: 주소 해시 우선, 없으면 첫 섹션 */
+  const [active, setActive] = useState<string>(() => {
+    if (typeof window === "undefined") return sections[0]?.id ?? "";
+    const hash = window.location.hash.slice(1);
+    return (hash || sections[0]?.id) ?? "";
+  });
+
+  /* 스티키 위치: 전역 CSS 변수(--appbar-h) 기반으로 계산 */
+  const appbarH =
+    typeof window !== "undefined"
+      ? parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--appbar-h"
+          ) || "56"
+        ) || 56
+      : 56;
+  const topPx = appbarH + 12;
+
+  /* refs: 옵저버 인스턴스 / 섹션 DOM 캐시 / 최근 활성 id */
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionElsRef = useRef<HTMLElement[]>([]);
+  const lastActiveRef = useRef<string>(active);
+
+  /* 탭 클릭: 헤더 높이만큼 보정하여 스무스 스크롤 + pushState */
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, id: SectionId) => {
+      e.preventDefault();
+      if (typeof window === "undefined") return;
+
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const y = el.getBoundingClientRect().top + window.scrollY - (topPx + 4);
+      window.history.pushState(null, "", `#${id}`);
+      window.scrollTo({ top: y, behavior: "smooth" });
+      lastActiveRef.current = id;
+      setActive(id);
+    },
+    [topPx]
+  );
+
+  /* 스크롤 연동: IntersectionObserver로 현재 섹션 감지 후 해시/활성 동기화 */
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // 섹션 DOM을 1회 수집 후 캐시
+    sectionElsRef.current = sections
+      .map(({ id }) => document.getElementById(id) as HTMLElement | null)
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    // 기존 옵저버 정리
+    observerRef.current?.disconnect();
+
+    // 옵저버 생성
     const io = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          const id = entry.target.id;
-          // 화면 상단 기준 거리와 교차 비율을 저장
-          visibleMapRef.current[id] = {
-            ratio: entry.isIntersecting ? entry.intersectionRatio : 0,
-            top: entry.boundingClientRect.top,
-          };
-        }
+        // 뷰포트에 걸린 항목 중 상단에 가까운 섹션 우선
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-        // 1순위: 화면 상단과의 거리(topDist) 최소, 2순위: 교차 비율(ratio) 최대
-        const next = sections
-          .map((s) => {
-            const v = visibleMapRef.current[s.id];
-            return {
-              id: s.id,
-              // 상단보다 아래(>=0)에 있으면 그 값을, 위로 지나가면 큰 양수로 보정
-              topDist:
-                v?.top !== undefined
-                  ? v.top >= 0
-                    ? v.top
-                    : Number.POSITIVE_INFINITY // 위로 지나간 섹션은 뒤로 밀기
-                  : Number.POSITIVE_INFINITY,
-              ratio: v?.ratio ?? 0,
-            };
-          })
-          // 1순위: topDist가 가장 작은 것(화면 상단에 가장 가까움)
-          // 2순위: 교차 비율이 큰 것
-          .sort((a, b) =>
-            a.topDist !== b.topDist ? a.topDist - b.topDist : b.ratio - a.ratio
-          )[0];
+        if (visible.length === 0) return;
 
-        if (next && next.id && next.id !== active) {
-          setActive(next.id);
+        const id = (visible[0].target as HTMLElement).id;
+        if (id && id !== lastActiveRef.current) {
+          // 스크롤 유발 없는 해시 교체
+          window.history.replaceState(null, "", `#${id}`);
+          lastActiveRef.current = id;
+          setActive(id);
         }
       },
       {
-        // sticky 높이를 고려해 상단 여백을 넉넉히 빼줌
-        rootMargin: `-${Math.max(0, top + 32)}px 0px -60% 0px`,
+        // 스티키 헤더 높이만큼 상단을 음수 마진 처리, 하단 60%는 제외해 과도한 전환 방지
+        root: null,
+        rootMargin: `-${topPx}px 0px -60% 0px`,
         threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
       }
     );
+    // 관찰 시작
+    sectionElsRef.current.forEach((el) => io.observe(el));
+    observerRef.current = io;
 
-    // 관찰 대상 섹션 요소 수집 후 observe
-    const targets = sections
-      .map((s) => document.getElementById(s.id))
-      .filter((el): el is HTMLElement => !!el);
-
-    targets.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [sections, top, active]);
+  }, [sections, topPx]);
 
-  // active 변경 시 URL 해시 동기화(#section-id)
+  // 해시/브라우저 내비게이션 동기화
   useEffect(() => {
-    if (!active) return;
-    if (window.location.hash.replace("#", "") !== active) {
-      history.replaceState(null, "", `#${active}`);
-    }
-  }, [active]);
-
-  // active 변경/리사이즈 시 하이라이트 인디케이터 위치/폭 갱신 + 탭 가시 범위로 스크롤
-  useEffect(() => {
-    const update = () => {
-      const el = refs.current[active];
-      if (!el) return;
-      const parent = el.offsetParent as HTMLElement | null;
-      const left = el.offsetLeft - (parent?.offsetLeft ?? 0);
-      setIndicator({ left, width: el.offsetWidth });
-      el.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
+    if (typeof window === "undefined") return;
+    const syncByHash = () => {
+      const id = window.location.hash.slice(1);
+      if (id && id !== lastActiveRef.current) {
+        lastActiveRef.current = id;
+        setActive(id);
+      }
     };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, [active]);
-
-  // 렌더링 최적화: sections 참조 동일성 유지
-  const items = useMemo(() => sections, [sections]);
-
-  // 앵커 ref 등록 헬퍼
-  const setRef =
-    (id: string) =>
-    (el: HTMLAnchorElement | null): void => {
-      refs.current[id] = el;
+    window.addEventListener("hashchange", syncByHash);
+    window.addEventListener("popstate", syncByHash);
+    return () => {
+      window.removeEventListener("hashchange", syncByHash);
+      window.removeEventListener("popstate", syncByHash);
     };
+  }, []);
 
   return (
     <nav
       aria-label='섹션 내비게이션'
       className='sticky z-30 mb-6'
-      style={{ top }}
+      style={{ top: topPx }}
     >
-      <div
-        className='
-          relative rounded-xl border border-black/10 dark:border-white/10
-          bg-white/70 dark:bg-neutral-900/60
-          px-2 py-2
-        '
-      >
-        {/* 가로 스크롤 리스트 */}
+      <div className='mx-auto max-w-6xl'>
         <div
-          className='relative flex gap-2 overflow-x-auto no-scrollbar scroll-px-2'
+          className='relative flex gap-2 overflow-x-auto no-scrollbar px-1.5'
           role='tablist'
-          aria-orientation='horizontal'
         >
-          {/* 액티브 인디케이터 */}
-          <div
-            className='pointer-events-none absolute bottom-1 h-0.5 rounded-full bg-[--ring] transition-all duration-300'
-            style={{
-              left: indicator.left + 8,
-              width: Math.max(0, indicator.width - 16),
-            }}
-            aria-hidden
-          />
-          {items.map((s) => {
-            const isActive = active === s.id;
+          {sections.map(({ id, labelKey }) => {
+            const selected = active === id;
+            const fullTitle = t(`${id}.title` as const);
+
             return (
               <a
-                key={s.id}
-                href={`#${s.id}`}
-                ref={setRef(s.id)}
+                key={id}
+                href={`#${id}`}
+                onClick={(e) => handleClick(e, id)}
                 role='tab'
-                aria-selected={isActive}
-                aria-controls={s.id}
-                className={`
-                  relative shrink-0 rounded-full border border-transparent
-                  px-3.5 py-1.5 text-sm transition
+                aria-selected={selected}
+                title={fullTitle}
+                className={`h-9 px-3 text-sm leading-none rounded-md transition
                   ${
-                    isActive
-                      ? "font-medium text-black dark:text-white"
-                      : "text-black/60 hover:text-black/80 dark:text-white/60 dark:hover:text-white/80"
+                    selected
+                      ? "font-semibold underline underline-offset-8"
+                      : "text-foreground/70 hover:text-foreground hover:bg-foreground/5"
                   }
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--ring]
-                `}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById(s.id);
-                  if (target) {
-                    // 먼저 active를 즉시 반영해 해시/인디케이터가 바로 바뀌도록
-                    setActive(s.id);
-                    target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }
-                }}
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--ring]`}
               >
-                {t(s.labelKey)}
+                <span className='block max-w-[10rem] truncate'>
+                  {t(labelKey)}
+                </span>
               </a>
             );
           })}
         </div>
-        {/* 좌/우 페이드(오버플로우 힌트) */}
-        <div className='pointer-events-none absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-white/70 dark:from-neutral-900/60 to-transparent rounded-l-xl' />
-        <div className='pointer-events-none absolute inset-y-0 right-0 w-4 bg-gradient-to-l from-white/70 dark:from-neutral-900/60 to-transparent rounded-r-xl' />
       </div>
     </nav>
   );

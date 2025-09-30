@@ -1,38 +1,13 @@
-import { getTranslations } from "next-intl/server";
 import InPageNav from "@/components/projects/InPageNav";
 import WhySection from "@/components/sections/WhySection";
 import ProjectsShowcaseSection from "@/components/sections/ProjectsShowcaseSection";
 import ImpactSection from "@/components/sections/ImpactSection";
-import { AppLocale } from "@/i18n/routing";
 import NextJoySection from "@/components/sections/NextJoySection";
 
-export default async function ProjectsOnePage({
-  params,
-}: {
-  params: Promise<{ locale: AppLocale }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale });
-
+export default async function ProjectsOnePage() {
   return (
     <main className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8'>
-      {/* 헤더  */}
-      <header className='mb-4'>
-        <h1 className='text-2xl md:text-3xl font-semibold tracking-tight'>
-          {t("projects.title")}
-        </h1>
-        <p className='mt-2 opacity-80'>{t("projects.subtitle")}</p>
-      </header>
-
-      <InPageNav
-        sections={[
-          { id: "ch1", labelKey: "ch1.title" },
-          { id: "ch2", labelKey: "ch2.title" },
-          { id: "ch3", labelKey: "ch3.title" },
-          { id: "ch4", labelKey: "ch4.title" },
-        ]}
-      />
-
+      <InPageNav />
       <section id='ch1' className='scroll-mt-24'>
         <WhySection />
       </section>

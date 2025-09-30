@@ -1,42 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
-import { Volume2, VolumeX } from "lucide-react";
+import React from "react";
 import ThemeButton from "../common/ThemeButton";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
-  // 사운드: 기본 off, 사용자가 토글 시 짧은 벨
-  const [soundEnabled, setSoundEnabled] = useState(false);
-
+  const t = useTranslations();
   return (
-    <div>
-      {/* 테마/사운드 토글 영역 */}
-      <div className='fixed top-6 right-6 z-20 flex items-center gap-2'>
-        <ThemeButton />
-        {/* 사운드 토글 */}
-        <button
-          onClick={() => setSoundEnabled((s) => !s)}
-          className='inline-flex h-10 w-10 items-center justify-center rounded-full
-           border border-[var(--border)] bg-[var(--bg)] text-[var(--fg)]
-           hover:brightness-[.98] focus:outline-none focus-visible:ring-2'
-          aria-pressed={soundEnabled}
-          title={soundEnabled ? "Sound Off" : "Sound On"}
-          aria-label={soundEnabled ? "Sound Off" : "Sound On"}
-        >
-          {soundEnabled ? (
-            <VolumeX className='h-5 w-5' />
-          ) : (
-            <Volume2 className='h-5 w-5' />
-          )}
-          <span className='sr-only'>
-            {soundEnabled ? "Sound Off" : "Sound On"}
-          </span>
-        </button>
+    <header
+      className='sticky top-0 z-40 h-14 border-b border-border
+                 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60'
+      style={{ height: "var(--appbar-h, 56px)" }}
+    >
+      <div className='mx-auto max-w-6xl h-full px-4 sm:px-6 lg:px-8'>
+        {/* 좌: 브랜드 / 우: 컨트롤 */}
+        <div className='flex h-full items-center justify-between'>
+          <Link
+            href='/'
+            className='flex flex-row font-semibold tracking-tight items-center'
+          >
+            <h1 className='text-l md:text-xl'>{t("projects.title")}</h1>
+            <p className='text-sm opacity-80 border-l ml-4 pl-4'>
+              {t("projects.subtitle")}
+            </p>
+          </Link>
 
-        {/* 언어 변경 */}
-        <LanguageSwitcher />
+          <div className='flex items-center gap-2'>
+            <ThemeButton />
+            <LanguageSwitcher />
+          </div>
+        </div>
       </div>
-    </div>
+    </header>
   );
 }
