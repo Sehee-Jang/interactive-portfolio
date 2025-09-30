@@ -234,5 +234,8 @@
       "projects": "프로젝트",
       "epilogue": "에필로그"
     }
+  },
+  "loading": {
+    "message": "로딩중…"
   }
 }

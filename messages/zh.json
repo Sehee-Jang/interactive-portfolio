@@ -226,5 +226,8 @@
       "projects": "项目",
       "epilogue": "尾声"
     }
+  },
+  "loading": {
+    "message": "正在加载页面…"
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 type LoadingScreenProps = {
   /** 화면 중앙에 작은 문구를 보일지 여부 */
@@ -10,9 +11,13 @@ type LoadingScreenProps = {
 };
 
 export default function LoadingScreen({
-  message = "Loading…",
+  message,
   fullscreen = true,
 }: LoadingScreenProps) {
+  const t = useTranslations();
+  // prop이 없으면 i18n 키를 사용
+  const label = message ?? t("loading.message");
+
   // 레이아웃 프리셋: 전체 오버레이 vs 일반 컨테이너
   const wrapperClass = fullscreen
     ? "fixed inset-0 grid place-items-center bg-background/70 backdrop-blur-sm z-[60]"
@@ -50,7 +55,7 @@ export default function LoadingScreen({
         </div>
 
         {/* 보조 문구 */}
-        <p className='text-sm text-muted-foreground'>{message}</p>
+        <p className='text-sm text-muted-foreground'>{label}</p>
       </div>
     </div>
   );

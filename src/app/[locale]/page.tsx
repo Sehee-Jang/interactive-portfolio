@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Prologue from "@/components/Prologue/Prologue";
 import type { AppLocale } from "@/i18n/routing";
 import LoadingScreen from "@/components/common/LoadingScreen";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page(props: {
   params: Promise<{ locale: string }>;
@@ -9,13 +10,14 @@ export default async function Page(props: {
 }) {
   const { locale } = await props.params;
   const loc = isAppLocale(locale) ? locale : "ko";
+  const t = await getTranslations({ locale });
 
   return (
     <main className='min-h-[100svh]'>
       <Suspense
         fallback={
           <div className='px-4 py-8'>
-            <LoadingScreen message='Loading…' fullscreen={false} />
+            <LoadingScreen message={t("loading.message")} fullscreen={false} />
           </div>
         }
       >

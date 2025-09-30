@@ -244,5 +244,8 @@
       "projects": "Projects",
       "epilogue": "Epilogue"
     }
+  },
+  "loading": {
+    "message": "Loading…"
   }
 }
