@@ -103,21 +103,11 @@
   "ch3": {
     "title": "기쁨이 남긴 흔적",
     "nav": "Impact",
+    "messageHeadline": "제가 만든 작은 변화가, 누군가의 하루를 더 즐겁게 바꿨습니다.",
     "metrics": "변화는 숫자로도, 감정으로도 증명됩니다.",
     "metricsLabel": "성과 지표",
     "beforeLabel": "Before",
     "afterLabel": "After",
-    "feedback": "사람들의 기쁨이 곧 결과입니다.",
-    "messageHeadline": "제가 만든 작은 변화가, 누군가의 하루를 더 즐겁게 바꿨습니다.",
-    "roles": {
-      "student": "수강생",
-      "tutor": "튜터"
-    },
-    "feedbackItems": {
-      "student1": "예약·수정이 간편해졌어요",
-      "tutor1": "휴무 설정으로 일정 관리가 쉬워졌습니다"
-    },
-
     "metricLabels": {
       "duplicateBookings": "중복 예약 건수",
       "opsInterventionMinutes": "운영 개입 시간"
@@ -128,6 +118,19 @@
     }
   },
   "ch4": {
+    "title": "사람들의 기쁨이 곧 결과입니다.",
+    "nav": "Feedback",
+    "headline": "실제 수강생·튜터 의견 일부를 발췌했습니다.",
+    "roles": {
+      "student": "수강생",
+      "tutor": "튜터"
+    },
+    "feedbackItems": {
+      "student1": "예약·수정이 간편해졌어요",
+      "tutor1": "휴무 설정으로 일정 관리가 쉬워졌습니다"
+    }
+  },
+  "ch5": {
     "title": "세상에 기쁨을 펼칠 다음 여정은 어디일까요?",
     "nav": "Next",
     "message": "세상에 기쁨을 펼치고 싶은 곳이 있나요? 저는 그 여정을 함께하고 싶습니다.",

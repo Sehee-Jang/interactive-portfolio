@@ -108,31 +108,34 @@
   "ch3": {
     "title": "Traces of Joy",
     "nav": "Impact",
-    "metrics": "Change is proven both in numbers and feelings.",
+    "messageHeadline": "Small changes I made made someone’s day more delightful.",
+    "metrics": "Change is proven by numbers—and by feelings.",
     "metricsLabel": "Key Metrics",
     "beforeLabel": "Before",
     "afterLabel": "After",
-    "feedback": "People’s joy is the real result.",
-    "messageHeadline": "Small changes I built made someone’s day more joyful.",
-    "roles": {
-      "student": "Student",
-      "tutor": "Tutor"
-    },
-    "feedbackItems": {
-      "student1": "Booking and editing got much easier.",
-      "tutor1": "Day-off settings made scheduling simple."
-    },
-
     "metricLabels": {
       "duplicateBookings": "Duplicate bookings",
       "opsInterventionMinutes": "Ops intervention time"
     },
     "units": {
-      "count": "cases",
+      "count": "count",
       "minutes": "min"
     }
   },
   "ch4": {
+    "title": "People’s joy is the result that matters.",
+    "nav": "Feedback",
+    "headline": "The small changes I made made someone’s day more delightful.",
+    "roles": {
+      "student": "Student",
+      "tutor": "Tutor"
+    },
+    "feedbackItems": {
+      "student1": "Booking and editing became much easier.",
+      "tutor1": "Day-off settings made scheduling simpler."
+    }
+  },
+  "ch5": {
     "title": "Where will the next journey to spread joy to the world be?",
     "nav": "Next",
     "message": "Is there a place where you want to spread joy? I would love to join you on that journey.",

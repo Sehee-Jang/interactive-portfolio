@@ -90,20 +90,11 @@
   "ch3": {
     "title": "喜悦留下的痕迹",
     "nav": "Impact",
+    "messageHeadline": "我做出的细小改变，让某人的一天更愉快。",
     "metrics": "改变既能用数字证明，也能用感受证明。",
     "metricsLabel": "核心指标",
     "beforeLabel": "Before",
     "afterLabel": "After",
-    "feedback": "人们的喜悦就是结果。",
-    "messageHeadline": "我做出的细小改变，让某人的一天更愉快。",
-    "roles": {
-      "student": "学员",
-      "tutor": "导师"
-    },
-    "feedbackItems": {
-      "student1": "预约与修改变得更方便了。",
-      "tutor1": "通过休息日设置，排班更轻松。"
-    },
     "metricLabels": {
       "duplicateBookings": "重复预约数量",
       "opsInterventionMinutes": "运营介入时长"
@@ -114,6 +105,19 @@
     }
   },
   "ch4": {
+    "title": "人们的喜悦就是最重要的结果。",
+    "nav": "Feedback",
+    "headline": "我做出的细小改变，让某人的一天更愉快。",
+    "roles": {
+      "student": "学员",
+      "tutor": "导师"
+    },
+    "feedbackItems": {
+      "student1": "预约与修改变得更方便了。",
+      "tutor1": "通过休息日设置，排班更轻松。"
+    }
+  },
+  "ch5": {
     "title": "下一段将喜悦传播到世界的旅程将在哪里？",
     "nav": "Next",
     "message": "有想把喜悦传播到的地方吗？我愿意与你一起踏上这段旅程。",

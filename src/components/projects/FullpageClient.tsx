@@ -6,12 +6,13 @@ import WhySection from "@/components/sections/WhySection";
 import ProjectsShowcaseSection from "@/components/sections/ProjectsShowcaseSection";
 import ImpactSection from "@/components/sections/ImpactSection";
 import NextJoySection from "@/components/sections/NextJoySection";
+import FeedbackSection from "../sections/FeedbackSection";
 
 /* fullpage 앵커(주소 해시) 상수 + 유니온 타입 */
-const ANCHORS = ["ch1", "ch2", "ch3", "ch4"] as const;
+const ANCHORS = ["ch1", "ch2", "ch3", "ch4", "ch5"] as const;
 export type AnchorId = (typeof ANCHORS)[number];
 
-type Labels = readonly [string, string, string, string];
+type Labels = readonly [string, string, string, string, string];
 
 interface FullpageClientProps {
   navLabels: Labels; // 서버에서 번역된 네비 라벨
@@ -68,6 +69,9 @@ export default function FullpageClient({
             </section>
             <section className='section'>
               <ImpactSection />
+            </section>
+            <section className='section'>
+              <FeedbackSection />
             </section>
             <section className='section'>
               <NextJoySection />

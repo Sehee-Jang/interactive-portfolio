@@ -16,6 +16,7 @@ export default async function ProjectsPage({
     t("ch2.nav"),
     t("ch3.nav"),
     t("ch4.nav"),
+    t("ch5.nav"),
   ] as const;
 
   return (

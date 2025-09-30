@@ -102,26 +102,16 @@
     }
   },
   "ch3": {
-    "title": "喜びが残した軌跡",
+    "title": "喜びが残した足跡",
     "nav": "Impact",
-    "metrics": "変化は数字でも感情でも証明できます。",
-    "metricsLabel": "成果指標",
+    "messageHeadline": "小さな改善が、誰かの一日をもっと楽しくしました。",
+    "metrics": "変化は数字でも、感情でも証明できます。",
+    "metricsLabel": "主要指標",
     "beforeLabel": "Before",
     "afterLabel": "After",
-    "feedback": "人々の喜びこそ成果です。",
-    "messageHeadline": "私が作った小さな変化が、誰かの一日をもっと楽しくしました。",
-    "roles": {
-      "student": "受講生",
-      "tutor": "チューター"
-    },
-    "feedbackItems": {
-      "student1": "予約・変更がとても簡単になりました。",
-      "tutor1": "休業設定でスケジュール管理が楽になりました。"
-    },
-
     "metricLabels": {
       "duplicateBookings": "重複予約件数",
-      "opsInterventionMinutes": "運営介入時間"
+      "opsInterventionMinutes": "運用介入時間"
     },
     "units": {
       "count": "件",
@@ -129,6 +119,19 @@
     }
   },
   "ch4": {
+    "title": "人々の喜びこそが結果です。",
+    "nav": "Feedback",
+    "headline": "小さな改善が、誰かの一日をもっと楽しくしました。",
+    "roles": {
+      "student": "受講生",
+      "tutor": "チューター"
+    },
+    "feedbackItems": {
+      "student1": "予約・修正がずっと簡単になりました。",
+      "tutor1": "休業日の設定でスケジュール管理が楽に。"
+    }
+  },
+  "ch5": {
     "title": "世界に喜びを届ける次の旅はどこでしょうか？",
     "nav": "Next",
     "message": "世界に喜びを届けたい場所はありますか？その旅を私は共に歩みたいです。",

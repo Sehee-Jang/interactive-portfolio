@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
  * - 페이지 하단 근처에서도 충분한 공간을 확보하도록 min-h-svh 사용
  */
 export default function NextJoySection() {
-  const t = useTranslations("ch4");
+  const t = useTranslations("ch5");
 
   return (
     <section className='relative flex flex-col items-center justify-center py-24 text-center'>
