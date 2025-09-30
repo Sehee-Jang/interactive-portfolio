@@ -18,7 +18,7 @@ export default function WhySection() {
   ];
 
   return (
-    <div className='min-h-svh grid place-items-center'>
+    <div className='grid place-items-center'>
       <div className='w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16'>
         <header className='mb-8 sm:mb-10'>
           <h2 className='text-[22px] sm:text-3xl font-semibold tracking-tight'>

@@ -130,8 +130,7 @@ export default function ProjectsShowcaseSection() {
   const techStack = ["Next.js", "React", "Firebase", "EmailJS"];
 
   return (
-    // svh로 뷰포트 높이 기반 섹션, 가로 넘침 방지
-    <div className='min-h-svh grid place-items-center overflow-x-hidden'>
+    <div className='grid place-items-center overflow-x-hidden'>
       <div className='w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-10'>
         <header className='mb-6 sm:mb-8'>
           <h2 className='text-[22px] sm:text-3xl font-semibold tracking-tight'>

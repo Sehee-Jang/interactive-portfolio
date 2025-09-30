@@ -14,8 +14,7 @@ export default function NextJoySection() {
   const t = useTranslations("ch4");
 
   return (
-    // 화면 중앙 정렬 + 위아래 여백, 다크/라이트 상관없이 텍스트 중앙 정렬
-    <section className='min-h-svh relative flex flex-col items-center justify-center py-24 text-center'>
+    <section className='relative flex flex-col items-center justify-center py-24 text-center'>
       {/* 타이틀: 아래에서 위로 부드럽게 등장 */}
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
