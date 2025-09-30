@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Prologue from "@/components/sections/Prologue";
+import Prologue from "@/components/Prologue/Prologue";
 import type { AppLocale } from "@/i18n/routing";
 import LoadingScreen from "@/components/common/LoadingScreen";
 

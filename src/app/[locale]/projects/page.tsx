@@ -1,25 +1,26 @@
-import InPageNav from "@/components/projects/InPageNav";
-import WhySection from "@/components/sections/WhySection";
-import ProjectsShowcaseSection from "@/components/sections/ProjectsShowcaseSection";
-import ImpactSection from "@/components/sections/ImpactSection";
-import NextJoySection from "@/components/sections/NextJoySection";
+import { getTranslations } from "next-intl/server";
+import type { AppLocale } from "@/i18n/routing";
+import FullpageClient from "@/components/projects/FullpageClient";
 
-export default async function ProjectsOnePage() {
+export default async function ProjectsPage({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  // 네비게이션 라벨
+  const navLabels = [
+    t("ch1.nav"),
+    t("ch2.nav"),
+    t("ch3.nav"),
+    t("ch4.nav"),
+  ] as const;
+
   return (
-    <main className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8'>
-      <InPageNav />
-      <section id='ch1' className='scroll-mt-24'>
-        <WhySection />
-      </section>
-      <section id='ch2' className='scroll-mt-24'>
-        <ProjectsShowcaseSection />
-      </section>
-      <section id='ch3' className='scroll-mt-24'>
-        <ImpactSection />
-      </section>
-      <section id='ch4' className='scroll-mt-24'>
-        <NextJoySection />
-      </section>
+    <main className='relative'>
+      <FullpageClient navLabels={navLabels} />
     </main>
   );
 }

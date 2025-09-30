@@ -2,16 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import type { AnchorId } from "./FullpageClient";
 
-/* 네비가 제어할 섹션 id 타입 고정 */
-type SectionId = "ch1" | "ch2" | "ch3" | "ch4";
-/* 섹션 정의: id와 i18n 라벨 키(축약 네비 라벨) */
-type Section = { id: SectionId; labelKey: `ch${1 | 2 | 3 | 4}.nav` };
+type Section = { id: AnchorId; labelKey: `ch${1 | 2 | 3 | 4}.nav` };
 
 export default function InPageNav() {
   const t = useTranslations();
 
-  /* 네비용 섹션 목록: 재생성 방지 */
+  // 네비 섹션 정의
   const sections: readonly Section[] = useMemo(
     () => [
       { id: "ch1", labelKey: "ch1.nav" },
@@ -22,14 +20,14 @@ export default function InPageNav() {
     []
   );
 
-  /* 초기 활성 섹션: 주소 해시 우선, 없으면 첫 섹션 */
+  // 초기 활성
   const [active, setActive] = useState<string>(() => {
     if (typeof window === "undefined") return sections[0]?.id ?? "";
     const hash = window.location.hash.slice(1);
     return (hash || sections[0]?.id) ?? "";
   });
 
-  /* 스티키 위치: 전역 CSS 변수(--appbar-h) 기반으로 계산 */
+  // 스티키 top 계산
   const appbarH =
     typeof window !== "undefined"
       ? parseFloat(
@@ -40,45 +38,43 @@ export default function InPageNav() {
       : 56;
   const topPx = appbarH + 12;
 
-  /* refs: 옵저버 인스턴스 / 섹션 DOM 캐시 / 최근 활성 id */
+  // refs
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sectionElsRef = useRef<HTMLElement[]>([]);
   const lastActiveRef = useRef<string>(active);
 
-  /* 탭 클릭: 헤더 높이만큼 보정하여 스무스 스크롤 + pushState */
+  // fullpage 이동 헬퍼(폴백 포함)
+  const moveTo = useCallback((id: AnchorId) => {
+    const api = (
+      window as unknown as { fullpage_api?: { moveTo: (a: string) => void } }
+    ).fullpage_api;
+    if (api?.moveTo) api.moveTo(id);
+    else location.hash = `#${id}`;
+  }, []);
+
+  // 탭 클릭
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, id: SectionId) => {
+    (e: React.MouseEvent<HTMLAnchorElement>, id: AnchorId) => {
       e.preventDefault();
-      if (typeof window === "undefined") return;
-
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const y = el.getBoundingClientRect().top + window.scrollY - (topPx + 4);
-      window.history.pushState(null, "", `#${id}`);
-      window.scrollTo({ top: y, behavior: "smooth" });
+      moveTo(id);
       lastActiveRef.current = id;
       setActive(id);
     },
-    [topPx]
+    [moveTo]
   );
 
-  /* 스크롤 연동: IntersectionObserver로 현재 섹션 감지 후 해시/활성 동기화 */
+  // 스크롤 연동(풀페이지 없이도 동작하도록 안전망 유지)
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // 섹션 DOM을 1회 수집 후 캐시
     sectionElsRef.current = sections
       .map(({ id }) => document.getElementById(id) as HTMLElement | null)
       .filter((el): el is HTMLElement => Boolean(el));
 
-    // 기존 옵저버 정리
     observerRef.current?.disconnect();
 
-    // 옵저버 생성
     const io = new IntersectionObserver(
       (entries) => {
-        // 뷰포트에 걸린 항목 중 상단에 가까운 섹션 우선
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -87,20 +83,18 @@ export default function InPageNav() {
 
         const id = (visible[0].target as HTMLElement).id;
         if (id && id !== lastActiveRef.current) {
-          // 스크롤 유발 없는 해시 교체
-          window.history.replaceState(null, "", `#${id}`);
+          history.replaceState(null, "", `#${id}`);
           lastActiveRef.current = id;
           setActive(id);
         }
       },
       {
-        // 스티키 헤더 높이만큼 상단을 음수 마진 처리, 하단 60%는 제외해 과도한 전환 방지
         root: null,
         rootMargin: `-${topPx}px 0px -60% 0px`,
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+        threshold: [0, 0.5, 1],
       }
     );
-    // 관찰 시작
+
     sectionElsRef.current.forEach((el) => io.observe(el));
     observerRef.current = io;
 
