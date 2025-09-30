@@ -20,6 +20,10 @@
     "ending": "この旅は私一人のものではありません。一緒に喜びを分かち合う準備はできましたか？",
     "cta": "プロジェクトへ"
   },
+  "projects": {
+    "title": "Sehee Jang",
+    "subtitle": "コードを超えて、体験と喜びを設計する旅"
+  },
   "ch1": {
     "title": "なぜ喜びなのか？",
     "nav": "Why?",
@@ -42,6 +46,7 @@
   "ch2": {
     "title": "喜びを実現するプロセス",
     "nav": "Process",
+    "messageHeadline": "私は単に機能を実装するのではなく、喜びを体験に変えます。",
     "problem": "退屈だった旅の出発点、問題は明確でした。",
     "problems": {
       "tutorHoursVisibility": "講師ごとの勤務時間を一目で把握しづらい",

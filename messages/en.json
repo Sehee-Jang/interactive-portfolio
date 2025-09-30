@@ -20,6 +20,10 @@
     "ending": "This journey is not mine alone. Are you ready to share joy together?",
     "cta": "Go to Projects"
   },
+  "projects": {
+    "title": "Sehee Jang",
+    "subtitle": "Beyond code, a journey to design experiences and joy"
+  },
   "ch1": {
     "title": "Why Joy?",
     "nav": "Why?",
@@ -42,6 +46,7 @@
   "ch2": {
     "title": "The Process of Realizing Joy",
     "nav": "Process",
+    "messageHeadline": "I don’t just implement features, I turn joy into experiences.",
     "problem": "At the starting point of a dull journey, the problems were clear.",
     "problems": {
       "tutorHoursVisibility": "Hard to see each tutor’s working hours at a glance",

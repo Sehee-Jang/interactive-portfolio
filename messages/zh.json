@@ -12,6 +12,10 @@
     "ending": "这段旅程不仅仅属于我。您准备好一起分享喜悦了吗？",
     "cta": "前往项目"
   },
+  "projects": {
+    "title": "Sehee Jang",
+    "subtitle": "超越代码，设计体验与喜悦的旅程"
+  },
   "ch1": {
     "title": "为什么是喜悦？",
     "nav": "Why?",
@@ -34,6 +38,7 @@
   "ch2": {
     "title": "实现喜悦的过程",
     "nav": "Process",
+    "messageHeadline": "我不仅仅实现功能，而是把喜悦化为体验。",
     "problem": "乏味旅程的起点，问题十分明确。",
     "problems": {
       "tutorHoursVisibility": "难以一目了然地查看各导师的工作时间",
