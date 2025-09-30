@@ -14,11 +14,12 @@
     "scroll": "스크롤"
   },
   "projects": {
-    "title": "개발자 장세희",
-    "subtitle": "기쁨 프로젝트"
+    "title": "Sehee Jang",
+    "subtitle": "코드를 넘어, 경험과 기쁨을 설계하는 여정"
   },
   "ch1": {
     "title": "왜 기쁨인가?",
+    "nav": "Why?",
     "question": "개발자는 코드를 짜는 사람일까요? 아니면 경험을 만드는 사람일까요?",
     "keywords": {
       "creative": {
@@ -37,6 +38,7 @@
   },
   "ch2": {
     "title": "기쁨을 실현하는 과정",
+    "nav": "Process",
     "messageHeadline": "저는 단순히 기능을 구현하는 것이 아니라, 기쁨을 경험으로 만들어냅니다.",
     "problem": "지루했던 여정의 출발점, 문제는 분명했습니다.",
     "problems": {
@@ -100,6 +102,7 @@
   },
   "ch3": {
     "title": "기쁨이 남긴 흔적",
+    "nav": "Impact",
     "metrics": "변화는 숫자로도, 감정으로도 증명됩니다.",
     "metricsLabel": "성과 지표",
     "beforeLabel": "Before",
@@ -126,6 +129,7 @@
   },
   "ch4": {
     "title": "세상에 기쁨을 펼칠 다음 여정은 어디일까요?",
+    "nav": "Next",
     "message": "세상에 기쁨을 펼치고 싶은 곳이 있나요? 저는 그 여정을 함께하고 싶습니다.",
     "cta": "함께하기",
     "signature": "張世喜 – 세상에 기쁨을 펼치는 개발자"

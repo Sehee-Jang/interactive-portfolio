@@ -22,6 +22,7 @@
   },
   "ch1": {
     "title": "Why Joy?",
+    "nav": "Why?",
     "question": "Is a developer just someone who writes code, or someone who creates experiences?",
     "keywords": {
       "creative": {
@@ -40,6 +41,7 @@
   },
   "ch2": {
     "title": "The Process of Realizing Joy",
+    "nav": "Process",
     "problem": "At the starting point of a dull journey, the problems were clear.",
     "problems": {
       "tutorHoursVisibility": "Hard to see each tutor’s working hours at a glance",
@@ -105,6 +107,7 @@
   },
   "ch3": {
     "title": "Traces of Joy",
+    "nav": "Impact",
     "metrics": "Change is proven both in numbers and feelings.",
     "metricsLabel": "Key Metrics",
     "beforeLabel": "Before",
@@ -131,6 +134,7 @@
   },
   "ch4": {
     "title": "Where will the next journey to spread joy to the world be?",
+    "nav": "Next",
     "message": "Is there a place where you want to spread joy? I would love to join you on that journey.",
     "cta": "Work together",
     "signature": "Sehee Jang – A developer who spreads joy to the world"

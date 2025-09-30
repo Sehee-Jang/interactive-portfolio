@@ -14,6 +14,7 @@
   },
   "ch1": {
     "title": "为什么是喜悦？",
+    "nav": "Why?",
     "question": "开发者只是写代码的人吗？还是创造体验的人？",
     "keywords": {
       "creative": {
@@ -32,6 +33,7 @@
   },
   "ch2": {
     "title": "实现喜悦的过程",
+    "nav": "Process",
     "problem": "乏味旅程的起点，问题十分明确。",
     "problems": {
       "tutorHoursVisibility": "难以一目了然地查看各导师的工作时间",
@@ -87,6 +89,7 @@
   },
   "ch3": {
     "title": "喜悦留下的痕迹",
+    "nav": "Impact",
     "metrics": "改变既能用数字证明，也能用感受证明。",
     "metricsLabel": "核心指标",
     "beforeLabel": "Before",
@@ -112,6 +115,7 @@
   },
   "ch4": {
     "title": "下一段将喜悦传播到世界的旅程将在哪里？",
+    "nav": "Next",
     "message": "有想把喜悦传播到的地方吗？我愿意与你一起踏上这段旅程。",
     "cta": "一起出发",
     "signature": "张世喜 – 将喜悦传播到世界的开发者"
