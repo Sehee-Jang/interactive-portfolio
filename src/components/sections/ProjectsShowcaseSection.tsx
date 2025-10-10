@@ -166,7 +166,7 @@ export default function ProjectsShowcaseSection() {
               title={t("approach")}
               badge='Chapter 2-2'
             />
-            <div className='min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-gutter:stable] js-scrollable'>
+            <div className='min-h-0 flex-1 overflow-y-auto pr-2 overscroll-contain [scrollbar-gutter:stable] js-scrollable'>
               <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'>
                 {steps.map((s, i) => (
                   <StepCard
@@ -187,7 +187,7 @@ export default function ProjectsShowcaseSection() {
               title={t("result")}
               badge='Chapter 2-3'
             />
-            <div className='min-h-0 flex-1 overflow-y-auto pr-2 js-scrollable'>
+            <div className='min-h-0 flex-1 overflow-y-auto pr-2 overscroll-contain js-scrollable'>
               <div className='relative pl-6'>
                 <div className='absolute left-0 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10' />
                 {timelineItems.map((id) => (
@@ -230,14 +230,10 @@ export default function ProjectsShowcaseSection() {
             />
 
             {/* 결과/영향 데모: 실시간 예약 현황 + 튜터 페이지 미리보기 */}
-            {(demoLive || demoTutor) && (
+            <div className='min-h-0 flex-1 overflow-y-auto pr-2 overscroll-contain js-scrollable'>
               <div className='mt-6 grid sm:grid-cols-2 gap-4 sm:gap-6'>
                 {demoLive && (
-                  <DemoPanel
-                    title={t("demos.liveStatus")}
-                    // media={demoLive}
-                    media={demoLive}
-                  />
+                  <DemoPanel title={t("demos.liveStatus")} media={demoLive} />
                 )}
                 {demoTutor && (
                   <DemoPanel
@@ -246,7 +242,7 @@ export default function ProjectsShowcaseSection() {
                   />
                 )}
               </div>
-            )}
+            </div>
 
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <span className='inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium'>
@@ -296,7 +292,7 @@ function Slide({
         rounded-2xl border border-black/10 dark:border-white/10
         bg-white/60 dark:bg-neutral-900/60
         p-4 sm:p-5 lg:p-6
-        flex flex-col
+        flex flex-col min-h-0
         h-[50svh] sm:h-[56svh] lg:h-[60svh]
         overflow-hidden
       '

@@ -159,6 +159,11 @@ button,
   cursor: pointer;
 }
 
+/* 모바일에서 상/하단 바운스가 상위(풀페이지)로 전달되는 걸 막아줘서, 섹션 안에서만 자연스럽게 스크롤되도록 도와줌 */
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
 /* 얇은 스크롤바 */
 * {
   scrollbar-width: thin;
