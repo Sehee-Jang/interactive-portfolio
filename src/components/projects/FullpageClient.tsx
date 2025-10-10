@@ -47,6 +47,7 @@ export default function FullpageClient({
           label: "Made with fullPage.js",
           position: "right",
         }}
+        normalScrollElements={".js-scrollable"} // 스크롤 가능한 요소 지정
         afterLoad={(_, dest) => {
           // 섹션 집입 시 해시 동기화
           const id = dest.anchor;

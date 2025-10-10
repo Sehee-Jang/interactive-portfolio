@@ -16,6 +16,7 @@ import {
   Clock,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 /* -------- 공용 타입 -------- */
 type SlideItem = Readonly<{
@@ -165,7 +166,7 @@ export default function ProjectsShowcaseSection() {
               title={t("approach")}
               badge='Chapter 2-2'
             />
-            <div className='min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-gutter:stable]'>
+            <div className='min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-gutter:stable] js-scrollable'>
               <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'>
                 {steps.map((s, i) => (
                   <StepCard
@@ -186,36 +187,37 @@ export default function ProjectsShowcaseSection() {
               title={t("result")}
               badge='Chapter 2-3'
             />
-
-            <div className='relative pl-6'>
-              <div className='absolute left-0 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10' />
-              {timelineItems.map((id) => (
-                <div key={id} className='relative mb-7 last:mb-0'>
-                  {/* Before */}
-                  <span className='absolute -left-3 top-3 block size-3 rounded-full bg-neutral-400' />
-                  <p className='mb-1 text-xs font-medium text-neutral-500'>
-                    {t("timeline.beforeLabel")}
-                  </p>
-                  <div className='rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/70 px-3.5 py-3'>
-                    <p className='text-sm sm:text-base font-semibold'>
-                      {t(`timeline.items.${id}.before`)}
+            <div className='min-h-0 flex-1 overflow-y-auto pr-2 js-scrollable'>
+              <div className='relative pl-6'>
+                <div className='absolute left-0 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10' />
+                {timelineItems.map((id) => (
+                  <div key={id} className='relative mb-7 last:mb-0'>
+                    {/* Before */}
+                    <span className='absolute -left-3 top-3 block size-3 rounded-full bg-neutral-400' />
+                    <p className='mb-1 text-xs font-medium text-neutral-500'>
+                      {t("timeline.beforeLabel")}
                     </p>
-                  </div>
-
-                  {/* After */}
-                  <div className='relative mt-4'>
-                    <span className='absolute -left-3 top-3 block size-3 rounded-full bg-emerald-500' />
-                    <p className='mb-1 text-xs font-medium text-emerald-600'>
-                      {t("timeline.afterLabel")}
-                    </p>
-                    <div className='rounded-xl border border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-900/10 px-3.5 py-3'>
+                    <div className='rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/70 px-3.5 py-3'>
                       <p className='text-sm sm:text-base font-semibold'>
-                        {t(`timeline.items.${id}.after`)}
+                        {t(`timeline.items.${id}.before`)}
                       </p>
                     </div>
+
+                    {/* After */}
+                    <div className='relative mt-4'>
+                      <span className='absolute -left-3 top-3 block size-3 rounded-full bg-emerald-500' />
+                      <p className='mb-1 text-xs font-medium text-emerald-600'>
+                        {t("timeline.afterLabel")}
+                      </p>
+                      <div className='rounded-xl border border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-900/10 px-3.5 py-3'>
+                        <p className='text-sm sm:text-base font-semibold'>
+                          {t(`timeline.items.${id}.after`)}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Slide>
 
@@ -226,25 +228,6 @@ export default function ProjectsShowcaseSection() {
               title={t("demos.title")}
               badge='Chapter 2-4'
             />
-            {/* <ul className='grid gap-3 sm:gap-4'>
-              {results.map(({ icon: Icon, id }, i) => (
-                <Appear key={id} delay={i * 90}>
-                  <li className='flex items-start gap-3 rounded-xl border ... p-4'>
-                    <span className='mt-0.5 inline-flex size-6 ...'>
-                      <Icon className='size-4' aria-hidden />
-                    </span>
-                    <div>
-                      <p className='text-sm sm:text-base font-medium'>
-                        {t(`results.${id}.label`)}
-                      </p>
-                      <p className='text-xs sm:text-sm text-black/60 dark:text-white/60'>
-                        {t(`results.${id}.sub`)}
-                      </p>
-                    </div>
-                  </li>
-                </Appear>
-              ))}
-            </ul> */}
 
             {/* 결과/영향 데모: 실시간 예약 현황 + 튜터 페이지 미리보기 */}
             {(demoLive || demoTutor) && (
@@ -522,11 +505,11 @@ function Lightbox({
   const current = items[openIndex];
   const video = isVideo(current.src);
 
-  return (
+  const overlay = (
     <div
       role='dialog'
       aria-modal='true'
-      className='fixed inset-0 z-50 bg-black/80 backdrop-blur-sm grid place-items-center p-4'
+      className='fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm grid place-items-center p-4'
       onClick={onClose}
     >
       <div
@@ -543,7 +526,6 @@ function Lightbox({
         </button>
 
         <div className='relative w-full h-[70vh] rounded-xl overflow-hidden border border-white/20 bg-black'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           {video ? (
             <video
               className='absolute inset-0 w-full h-full object-contain'
@@ -556,6 +538,7 @@ function Lightbox({
               <source src={current.src} />
             </video>
           ) : (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={current.src}
               alt={current.alt ?? "확대 미디어"}
@@ -565,11 +548,11 @@ function Lightbox({
         </div>
 
         {items.length > 1 && (
-          <div className='mt-3 flex items-center justify-between'>
+          <div className='mt-3 flex items-center justify-between text-white'>
             <button
               type='button'
               onClick={onPrev}
-              className='inline-flex items-center gap-1 rounded-lg border border-white/30 bg-white/10 px-3 py-1.5 text-white backdrop-blur hover:bg-white/20'
+              className='inline-flex items-center gap-1 rounded-lg border border-white/30 bg-white/10 px-3 py-1.5 backdrop-blur hover:bg-white/20'
               aria-label='이전'
             >
               <ChevronLeft className='size-4' /> 이전
@@ -580,7 +563,7 @@ function Lightbox({
             <button
               type='button'
               onClick={onNext}
-              className='inline-flex items-center gap-1 rounded-lg border border-white/30 bg-white/10 px-3 py-1.5 text-white backdrop-blur hover:bg-white/20'
+              className='inline-flex items-center gap-1 rounded-lg border border-white/30 bg-white/10 px-3 py-1.5 backdrop-blur hover:bg-white/20'
               aria-label='다음'
             >
               다음 <ChevronRight className='size-4' />
@@ -590,8 +573,9 @@ function Lightbox({
       </div>
     </div>
   );
-}
 
+  return createPortal(overlay, document.body);
+}
 /* ------------------------ 이미지 캐러셀 ------------------------ */
 // 문제 슬라이드 캐러셀: 키보드/스와이프/클릭 확대, 인디케이터 포함
 function ProblemSlidesCarousel({
