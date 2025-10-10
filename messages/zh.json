@@ -130,31 +130,31 @@
     "signature": "张世喜 – 将喜悦传播到世界的开发者"
   },
   "epilogue": {
-    "title": "传播喜悦的下一段旅程",
-    "subtitle": "如果我的介绍已足够，请在下方继续。",
-    "signatureSuffix": "把喜悦传递给世界的开发者",
+    "title": "展开喜悦的下一段旅程",
+    "subtitle": "如果我的故事让您产生共鸣，请继续往下了解。",
+    "signatureSuffix": "把喜悦传播给世界的开发者",
     "cta": {
       "mailto": {
-        "subject": "看到作品集后与您联系",
-        "body": "您好，张世喜。\n\n简单自我介绍：\n- 单位/姓名：\n- 感兴趣的内容（招聘/面试/社交等）：\n- 参考链接：\n\n谢谢。"
+        "subject": "看过作品集后联系您",
+        "body": "您好，张世喜。\n\n简单自我介绍：\n- 单位／姓名：\n- 关注内容（招聘／采访／合作等）：\n- 参考链接：\n\n谢谢！"
       },
       "resume": {
-        "title": "简历",
-        "desc": "一目了然地查看代表项目和技能。",
+        "title": "下载简历",
+        "desc": "一目了然地了解主要项目与技能。",
         "download": "下载简历",
-        "view": "查看简历",
-        "note": "中文/英文文件分别提供。"
+        "view": "在线查看简历",
+        "note": "韩文与英文版本分别提供。"
       },
       "emailCard": {
-        "title": "通过邮件联系",
-        "desc": "直接打开邮件应用或复制地址。",
+        "title": "通过邮箱联系",
+        "desc": "可直接打开邮箱应用或复制地址。",
         "button": "发送邮件",
         "copyEmail": "复制邮箱",
         "copied": "已复制"
       },
       "profile": {
         "title": "个人资料",
-        "desc": "也可以在这里查看代码和经历。",
+        "desc": "您也可以在这里查看我的代码和经历。",
         "github": {
           "label": "GitHub",
           "url": "https://github.com/Sehee-Jang"
@@ -164,20 +164,44 @@
           "url": "https://www.linkedin.com/in/seheejang"
         }
       },
-      "copyFallback": "无法访问剪贴板，请手动复制邮箱地址。"
+      "copyFallback": "当前环境不支持剪贴板，请手动复制邮箱地址。"
     },
     "quick": {
       "title": "快速反馈",
-      "desc": "只需点击一次，信号即可直达我。",
+      "desc": "只需一次点击，您的意向就会直接传达给我。如有需要，仅会请求最少的信息。",
       "labels": {
-        "hire": "我有招聘机会",
-        "interview": "我想邀请您面试",
-        "feedback": "我想留下网站反馈"
+        "hire": "我想发出招聘邀请",
+        "interview": "我想邀请采访",
+        "feedback": "我想提交网站反馈"
       },
       "sending": "发送中...",
       "done": "已发送！",
       "error": "发送失败，请稍后再试。",
-      "note": "选择内容仅用于回复，不会用于其他用途。"
+      "note": "您的信息仅用于回复联系，不作其他用途。",
+      "form": {
+        "title": {
+          "hire": "招聘邀请 – 快速联系方式",
+          "interview": "采访邀请 – 快速联系方式",
+          "feedback": "反馈 – 附加备注"
+        },
+        "desc": "请仅填写必要信息即可。",
+        "labels": {
+          "name": "姓名",
+          "email": "邮箱",
+          "company": "公司／机构",
+          "message": "留言"
+        },
+        "placeholders": {
+          "name": "張世喜",
+          "email": "name@example.com",
+          "company": "公司名（可选）",
+          "message": "简单背景或需求"
+        },
+        "actions": {
+          "cancel": "取消",
+          "send": "发送"
+        }
+      }
     }
   },
   "footer": {

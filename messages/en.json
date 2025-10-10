@@ -148,31 +148,31 @@
     "signature": "Sehee Jang – A developer who spreads joy to the world"
   },
   "epilogue": {
-    "title": "The Next Journey to Spread Joy",
-    "subtitle": "If my introduction was enough, let’s continue below.",
-    "signatureSuffix": "A developer spreading joy to the world",
+    "title": "Next Journey to Spread Joy",
+    "subtitle": "If my story resonates with you, let's continue below.",
+    "signatureSuffix": "A developer who spreads joy to the world",
     "cta": {
       "mailto": {
-        "subject": "Reaching out after seeing your portfolio",
-        "body": "Hello Sehee,\n\nQuick introduction:\n- Affiliation/Name:\n- Interest (Hiring / Interview / Networking, etc.):\n- Reference link:\n\nThank you."
+        "subject": "Reaching out after viewing your portfolio",
+        "body": "Hello, Sehee Jang,\n\nQuick introduction:\n- Name / Affiliation:\n- Purpose (hiring/interview/networking, etc.):\n- Reference link:\n\nThank you."
       },
       "resume": {
-        "title": "Resume",
-        "desc": "See key projects and skills at a glance.",
+        "title": "Download Resume",
+        "desc": "View key projects and skills at a glance.",
         "download": "Download CV",
-        "view": "View CV",
-        "note": "Korean/English files are provided separately."
+        "view": "View CV online",
+        "note": "Korean / English versions are provided separately."
       },
       "emailCard": {
         "title": "Contact by Email",
-        "desc": "Open your mail app directly or copy the address.",
+        "desc": "Open your mail app or copy the address directly.",
         "button": "Send Email",
         "copyEmail": "Copy Email",
         "copied": "Copied"
       },
       "profile": {
         "title": "Profiles",
-        "desc": "You can also check code and career history here.",
+        "desc": "You can also check my code and experience here.",
         "github": {
           "label": "GitHub",
           "url": "https://github.com/Sehee-Jang"
@@ -182,20 +182,48 @@
           "url": "https://www.linkedin.com/in/seheejang"
         }
       },
-      "copyFallback": "Clipboard access is restricted. Please copy the email address manually."
+      "copyFallback": "Clipboard access is restricted. Please copy the address manually."
     },
     "quick": {
       "title": "Quick Feedback",
-      "desc": "With one click, your signal reaches me instantly.",
+      "desc": "One click sends your signal right to me. If needed, I’ll ask for minimal info only.",
       "labels": {
-        "hire": "I have a hiring opportunity",
-        "interview": "I’d like to invite you for an interview",
-        "feedback": "I want to leave site feedback"
+        "hire": "I’d like to make a job offer",
+        "interview": "I’d like to request an interview",
+        "feedback": "I’d like to leave site feedback"
       },
       "sending": "Sending...",
       "done": "Sent!",
       "error": "Failed to send. Please try again later.",
-      "note": "Your selection will only be used for response purposes."
+      "note": "Your input will only be used for reply purposes.",
+      "form": {
+        "title": {
+          "hire": "Job Offer – Quick Contact",
+          "interview": "Interview Request – Quick Contact",
+          "feedback": "Feedback – Additional Note"
+        },
+        "desc": "Please fill in only the required fields.",
+        "labels": {
+          "name": "Name",
+          "email": "Email",
+          "company": "Company / Organization",
+          "message": "Message"
+        },
+        "placeholders": {
+          "name": "Sehee Jang",
+          "email": "name@example.com",
+          "company": "Company (optional)",
+          "message": "Brief background or request"
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "send": "Send"
+        },
+        "errors": {
+          "required": "This field is required.",
+          "invalidEmail": "Please enter a valid email address."
+        }
+      }
     }
   },
   "footer": {
