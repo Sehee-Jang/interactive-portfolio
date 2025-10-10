@@ -47,7 +47,14 @@ export default async function EpiloguePage({
 
       {/* 원클릭 의사 표시: API 연동 예정 */}
       <div className='mt-10'>
-        <QuickReact apiEndpoint='/api/quick-react' />
+        <QuickReact
+          apiEndpoint='/api/quick-react'
+          collect={{
+            hire: ["name", "email", "company", "message"],
+            interview: ["name", "email", "company", "message"],
+            // feedback 은 폼 없음 → 원클릭 전송
+          }}
+        />
       </div>
 
       {/* 시그니처 */}
