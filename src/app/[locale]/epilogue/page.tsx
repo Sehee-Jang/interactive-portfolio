@@ -2,6 +2,11 @@ import { getTranslations } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
 import QuickReact from "@/components/epilogue/QuickReact";
 import CTADeck from "@/components/epilogue/CTADeck";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Epilogue | Sehee Jang Portfolio",
+};
 
 type PageParams = { locale: AppLocale };
 

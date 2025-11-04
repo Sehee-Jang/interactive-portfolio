@@ -3,6 +3,11 @@ import Prologue from "@/components/Prologue/Prologue";
 import type { AppLocale } from "@/i18n/routing";
 import LoadingScreen from "@/components/common/LoadingScreen";
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Sehee Jang Portfolio",
+};
 
 export default async function Page(props: {
   params: Promise<{ locale: string }>;

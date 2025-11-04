@@ -1,6 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
 import FullpageClient from "@/components/projects/FullpageClient";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Project | Sehee Jang Portfolio",
+};
 
 export default async function ProjectsPage({
   params,
